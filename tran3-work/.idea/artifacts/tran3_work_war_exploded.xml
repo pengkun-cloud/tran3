@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="tran3-work:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/tran3_work_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="tran3-work/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="tran3-work" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
