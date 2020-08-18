@@ -11,10 +11,20 @@ public class Pemission {
 
     private Integer pid;
 
+    private String url;
+
     private String name;
 
     public Integer getId() {
         return id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setId(Integer id) {
@@ -34,6 +44,13 @@ public class Pemission {
     }
 
     public void setName(String name) {
+        this.name = name;
+    }
+
+    public Pemission(Integer id, Integer pid, String url, String name) {
+        this.id = id;
+        this.pid = pid;
+        this.url = url;
         this.name = name;
     }
 
