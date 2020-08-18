@@ -25,6 +25,16 @@ public class Personnel {
 
     private String professional; //用户职称
 
+    private Integer roleid;//用户角色
+
+    public Integer getRoleid() {
+        return roleid;
+    }
+
+    public void setRoleid(Integer roleid) {
+        this.roleid = roleid;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -97,7 +107,7 @@ public class Personnel {
         this.professional = professional;
     }
 
-    public Personnel(Integer id, String numbering, String name, Integer department, Integer security, Integer sex, Integer age, Integer duty, String professional) {
+    public Personnel(Integer id, String numbering, String name, Integer department, Integer security, Integer sex, Integer age, Integer duty, String professional, Integer roleid) {
         this.id = id;
         this.numbering = numbering;
         this.name = name;
@@ -107,6 +117,7 @@ public class Personnel {
         this.age = age;
         this.duty = duty;
         this.professional = professional;
+        this.roleid = roleid;
     }
 
     public Personnel() {
