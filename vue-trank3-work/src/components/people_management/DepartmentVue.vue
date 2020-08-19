@@ -5,7 +5,7 @@
 
       <el-button type="primary" @click="tankuang()">添加</el-button>
         <el-table
-          :data="pemissionList"
+          :data="departmentList"
           style="width: 100%" @row-click="clickRow" ref="tb">
           <el-table-column
             type="selection"
@@ -13,18 +13,10 @@
           </el-table-column>
 
           <el-table-column
-            label="权限名称"
+            label="部门名称"
             width="100">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.name}}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column
-            label="路径"
-            width="100">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px">{{ scope.row.url}}</span>
             </template>
           </el-table-column>
 
@@ -44,16 +36,12 @@
         </el-table>
 
 
-        <el-dialog title="权限" :visible.sync="dialogFormVisible">
-          <el-form :model="pemission" label-width="150px">
-            <el-input v-model="pemission.id" style="width: 260px"></el-input>
+        <el-dialog title="部门" :visible.sync="dialogFormVisible">
+          <el-form :model="department" label-width="150px">
+            <el-input v-model="department.id" style="width: 260px"></el-input>
 
-            <el-form-item label="权限名称 :">
-              <el-input v-model="pemission.name" style="width: 260px"></el-input>
-            </el-form-item>
-
-            <el-form-item label="路径:">
-              <el-input v-model="pemission.url" style="width: 260px"></el-input>
+            <el-form-item label="部门名称 :">
+              <el-input v-model="department.name" style="width: 260px"></el-input>
             </el-form-item>
 
           </el-form>
@@ -73,29 +61,28 @@
         name: "PeopleVue",
       data() {
         return {
-          pemission:{
+          department:{
             id:"",
             name:"",
-            url:"",
 
           },
 
           formLabelWidth:"120px",
           dialogFormVisible: false,
-          pemissionList:[],
+          departmentList:[],
         }
       },
       created:function(){
-        this.queryPemissionList();
+        this.queryDepartmentList();
 
       },
       methods: {
-        queryPemissionList(){
+        queryDepartmentList(){
           var self = this;
-          this.$axios.post("http://localhost:8085/pemission/queryPemission").then(function (response) {
+          this.$axios.post("http://localhost:8085/department/queryDepartment").then(function (response) {
            if(response.code = 200){
              console.log(response.data.data);
-             self.pemissionList = response.data.data;
+             self.departmentList = response.data.data;
            }
 
           })
@@ -104,11 +91,11 @@
         updateoradd(){
           var self = this;
           console.log(this.pemission);
-          this.$axios.post("http://localhost:8085/pemission/addOrUpdate",this.$qs.stringify(this.pemission)).then(function (response) {
+          this.$axios.post("http://localhost:8085/department/addOrUpdate",this.$qs.stringify(this.department)).then(function (response) {
             //console.log(response);
             self.dialogFormVisible=false;
             if(response.code = 200){
-              self.queryPemissionList();
+              self.queryDepartmentList();
             }
 
             // console.log(self.data);
@@ -117,10 +104,10 @@
 
         deleteAnimal:function(index,row){
           var self = this;
-          this.$axios.get("http://localhost:8085/pemission/delPemission?id="+row.id).then(function (response) {
+          this.$axios.get("http://localhost:8085/department/delDepartment?id="+row.id).then(function (response) {
             //console.log(response);
             if(response.code = 200){
-              self.queryPemissionList();
+              self.queryDepartmentList();
             }
           })
         },
@@ -128,9 +115,9 @@
 
         tankuang:function (index, row) {
           if(row!=null){
-            this.pemission = row;
+            this.department = row;
           }else{
-            this.pemission =[];
+            this.department =[];
           }
           this.dialogFormVisible=true;
         },
