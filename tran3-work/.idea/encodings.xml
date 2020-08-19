@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/attendance_management" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/car-management" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/meeting-management" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/people_management" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/personal_management" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/springcloud-eureka" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/springcloud-zuul" charset="UTF-8" />
   </component>

@@ -2,6 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/attendance_management/attendance_management.iml" filepath="$PROJECT_DIR$/attendance_management/attendance_management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/car-management/car-management.iml" filepath="$PROJECT_DIR$/car-management/car-management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meeting-management/meeting-management.iml" filepath="$PROJECT_DIR$/meeting-management/meeting-management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/people_management/people_management.iml" filepath="$PROJECT_DIR$/people_management/people_management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/personal_management/personal_management.iml" filepath="$PROJECT_DIR$/personal_management/personal_management.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud-eureka/springcloud-eureka.iml" filepath="$PROJECT_DIR$/springcloud-eureka/springcloud-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/springcloud-zuul/springcloud-zuul.iml" filepath="$PROJECT_DIR$/springcloud-zuul/springcloud-zuul.iml" />
       <module fileurl="file://$PROJECT_DIR$/tran3-work.iml" filepath="$PROJECT_DIR$/tran3-work.iml" />
