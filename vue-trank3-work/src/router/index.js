@@ -5,6 +5,8 @@ import PeopleVue from '@/components/people_management/PeopleVue'
 import PemissionVue from '@/components/people_management/PemissionVue'
 import RoleVue from '@/components/people_management/RoleVue'
 import DepartmentVue from '@/components/people_management/DepartmentVue'
+import Article from '@/components/article_management/Article'
+
 
 
 Vue.use(Router)
@@ -36,8 +38,12 @@ export default new Router({
           path: '/DepartmentVue',
           name: 'DepartmentVue',
           component: DepartmentVue,
+        },
+        {
+          path: '/Article',
+          name: 'Article',
+          component: Article,
         }
-
       ]
     },
 
