@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+   例如namespace="com.szh.mapper.personMapper"就是com.szh.mapper(包名)+personMapper(personMapper.xml文件去除后缀) -->
+<mapper namespace="com.fh.Files.mapper.RecMapper">
+
+    <!--查询档案SQL-->
+    <select id="queryrecord" resultType="com.fh.Files.vo.RecordVo">
+      select r.*,s.* from t_record r
+      left join t_secret s on r.secretId=s.secId
+    </select>
+
+    <!--添加档案SQL-->
+    <insert id="addrecord" parameterType="com.fh.Files.model.Record">
+    insert into t_record
+    (recName,recLandUser,recStorageLife,recRegistrationType,recRegistrationDate,recArea,secretId,recDepartment)
+    values
+    (#{recName},#{recLandUser},#{recStorageLife},#{recRegistrationType},#{recRegistrationDate},#{recArea},#{secretId},#{recDepartment})
+    </insert>
+
+    <!--回显档案SQL-->
+    <select id="huixianecord" parameterType="int" resultType="com.fh.Files.vo.RecordVo">
+        select r.*,s.* from t_record r
+      left join t_secret s on r.secretId=s.secId
+      where recId=#{recid}
+    </select>
+
+    <!--修改档案SQL-->
+    <update id="updateecord" parameterType="com.fh.Files.model.Record">
+        update t_record set recName=#{recName},recLandUser=#{recLandUser},recStorageLife=#{recStorageLife},recRegistrationType=#{recRegistrationType},recRegistrationDate=#{recRegistrationDate},secretId=#{secretId},recDepartment=#{recDepartment}
+        where recId=#{recId}
+    </update>
+
+    <!--删除档案SQL-->
+    <delete id="deleteecord" parameterType="int">
+        delete from t_record where recId=#{recId}
+    </delete>
+
+    <!--批量删除档案SQL-->
+    <delete id="deleteallecord" parameterType="list">
+        delete from t_record where recId in
+        <foreach collection="list" open="(" item="item" close=")" separator=",">
+          #{item}
+        </foreach>
+    </delete>
+
+</mapper>
