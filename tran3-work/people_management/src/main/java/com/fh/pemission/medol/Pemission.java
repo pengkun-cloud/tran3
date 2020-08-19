@@ -9,8 +9,6 @@ public class Pemission {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private Integer pid;
-
     private String url;
 
     private String name;
@@ -31,14 +29,6 @@ public class Pemission {
         this.id = id;
     }
 
-    public Integer getPid() {
-        return pid;
-    }
-
-    public void setPid(Integer pid) {
-        this.pid = pid;
-    }
-
     public String getName() {
         return name;
     }
@@ -47,9 +37,8 @@ public class Pemission {
         this.name = name;
     }
 
-    public Pemission(Integer id, Integer pid, String url, String name) {
+    public Pemission(Integer id, String url, String name) {
         this.id = id;
-        this.pid = pid;
         this.url = url;
         this.name = name;
     }

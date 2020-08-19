@@ -13,6 +13,27 @@ public class Role {
 
     private Integer status;
 
+    private String pemissionid;
+
+    public String getPemissionid() {
+        return pemissionid;
+    }
+
+    public void setPemissionid(String pemissionid) {
+        this.pemissionid = pemissionid;
+    }
+
+    public Role(Integer roleid, String rolename, Integer status, String pemissionid) {
+        this.roleid = roleid;
+        this.rolename = rolename;
+        this.status = status;
+        this.pemissionid = pemissionid;
+    }
+
+    public Role(Integer roleid) {
+        this.roleid = roleid;
+    }
+
     public Integer getRoleid() {
         return roleid;
     }
@@ -37,11 +58,6 @@ public class Role {
         this.status = status;
     }
 
-    public Role(Integer roleid, String rolename, Integer status) {
-        this.roleid = roleid;
-        this.rolename = rolename;
-        this.status = status;
-    }
 
     public Role() {
     }

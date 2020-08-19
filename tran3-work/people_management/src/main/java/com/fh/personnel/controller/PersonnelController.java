@@ -23,7 +23,7 @@ public class PersonnelController {
     }
 
     @RequestMapping("addOrUpdate")
-    private ServerResponse addOrUpdate(Personnel personnel){
+    public ServerResponse addOrUpdate(Personnel personnel){
         if(personnel.getId()!=null){
             personnelService.updatePersonnel(personnel);
         }else{
