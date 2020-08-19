@@ -6,6 +6,7 @@ import PemissionVue from '@/components/people_management/PemissionVue'
 import RoleVue from '@/components/people_management/RoleVue'
 import DepartmentVue from '@/components/people_management/DepartmentVue'
 import Article from '@/components/article_management/Article'
+import Category from '@/components/category_management/CategoryVue'
 
 
 
@@ -43,6 +44,12 @@ export default new Router({
           path: '/Article',
           name: 'Article',
           component: Article,
+        },
+        // 考勤类别
+        {
+          path: '/category',
+          name: 'Category',
+          component: Category,
         }
       ]
     },
