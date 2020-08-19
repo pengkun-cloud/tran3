@@ -4,11 +4,13 @@ import com.fh.common.ServerResponse;
 import com.fh.pemission.medol.Pemission;
 import com.fh.pemission.service.PemissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("pemission")
+@CrossOrigin
 public class PemissionController {
 
     @Autowired
@@ -20,7 +22,7 @@ public class PemissionController {
     }
 
     @RequestMapping("addOrUpdate")
-    private ServerResponse addOrUpdate(Pemission pemission){
+    public ServerResponse addOrUpdate(Pemission pemission){
         if(pemission.getId()!=null){
             pemissionService.updatePemission(pemission);
         }else{
@@ -29,7 +31,7 @@ public class PemissionController {
         return ServerResponse.scuess();
     }
     @RequestMapping("delPemission")
-    private ServerResponse delPemission(Integer id){
+    public ServerResponse delPemission(Integer id){
         pemissionService.delPemission(id);
         return ServerResponse.scuess();
     }

@@ -9,6 +9,19 @@
         select * from t_role
     </select>
 
+    <insert id="addRole" parameterType="com.fh.role.model.Role">
+        insert into t_role(rolename,status,pemissionid)
+        VALUES (#{rolename},#{status},#{pemissionid})
+    </insert>
+
+    <update id="updateRole" parameterType="com.fh.role.model.Role">
+         UPDATE t_role SET rolename = #{rolename},status = #{status},pemissionid = #{pemissionid}
+        where roleid=#{roleid}
+    </update>
+
+    <delete id="delRole">
+          delete from t_role where roleid=#{roleid}
+    </delete>
 
 
 </mapper>

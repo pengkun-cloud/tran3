@@ -19,9 +19,7 @@ public class Personnel {
 
     private Integer sex; //用户性别
 
-    private Integer age; //用户性别
-
-    private Integer duty; //用户职务
+    private Integer age; //用户年龄
 
     private String professional; //用户职称
 
@@ -91,13 +89,6 @@ public class Personnel {
         this.age = age;
     }
 
-    public Integer getDuty() {
-        return duty;
-    }
-
-    public void setDuty(Integer duty) {
-        this.duty = duty;
-    }
 
     public String getProfessional() {
         return professional;
@@ -107,7 +98,7 @@ public class Personnel {
         this.professional = professional;
     }
 
-    public Personnel(Integer id, String numbering, String name, Integer department, Integer security, Integer sex, Integer age, Integer duty, String professional, Integer roleid) {
+    public Personnel(Integer id, String numbering, String name, Integer department, Integer security, Integer sex, Integer age, String professional, Integer roleid) {
         this.id = id;
         this.numbering = numbering;
         this.name = name;
@@ -115,7 +106,6 @@ public class Personnel {
         this.security = security;
         this.sex = sex;
         this.age = age;
-        this.duty = duty;
         this.professional = professional;
         this.roleid = roleid;
     }

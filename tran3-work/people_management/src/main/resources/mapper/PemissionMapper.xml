@@ -9,6 +9,19 @@
         select * from t_pemission
     </select>
 
+    <insert id="addPemission" parameterType="com.fh.pemission.medol.Pemission">
+        insert into t_pemission(name,url)
+        VALUES (#{name},#{url})
+    </insert>
+
+    <update id="updatePemission" parameterType="com.fh.pemission.medol.Pemission">
+         UPDATE t_pemission SET name = #{name},url = #{url}
+        where id = #{id}
+    </update>
+
+    <delete id="delPemission">
+          delete from t_pemission where id=#{id}
+    </delete>
 
 
 </mapper>
