@@ -9,6 +9,18 @@
         select * from t_personnel
     </select>
 
+    <insert id="addPersonnel" parameterType="com.fh.personnel.medol.Personnel">
+        insert into t_personnel(numbering,name,department,security,sex,age,professional,roleid)
+        VALUES (#{numbering},#{name},#{department},#{security},#{sex},#{age},#{professional},#{roleid})
+    </insert>
 
+    <update id="updatePersonnel" parameterType="com.fh.personnel.medol.Personnel">
+         UPDATE t_personnel SET numbering = #{numbering},name = #{name},department = #{department},security = #{security},sex = #{sex},age = #{age},professional = #{professional},roleid = #{roleid}
+        where id = #{id}
+    </update>
+
+    <delete id="delPersonnel">
+          delete from t_personnel where id=#{id}
+    </delete>
 
 </mapper>
