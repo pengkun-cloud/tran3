@@ -5,12 +5,30 @@
 <mapper namespace="com.fh.article.mapper.ArticleMapper">
 
     <select id="queryList" parameterType="com.fh.article.param.Param" resultType="com.fh.article.model.Article">
-        select * from t_tran3_article limit #{start}, #{pageSize}
+        select * from t_tran3_article order by articleId desc limit #{start}, #{pageSize}
     </select>
 
     <select id="queryTotalCount" parameterType="com.fh.article.param.Param" resultType="long">
         select count(*) from t_tran3_article
     </select>
+
+    <insert id="addArticle" parameterType="com.fh.article.model.Article">
+        insert into t_tran3_article(articleName, articlePrice, articleCount, storeMember, storeDate, information)
+        values (#{articleName},#{articlePrice},#{articleCount},#{storeMember},#{storeDate},#{information})
+
+    </insert>
+
+    <update id="updateArticle" parameterType="com.fh.article.model.Article">
+
+        update t_tran3_article set articleName = #{articleName},
+        articlePrice = #{articlePrice}, articleCount = #{articleCount},
+        storeMember = #{storeMember}, storeDate = #{storeDate}, information = #{information}
+        where articleId = #{articleId}
+    </update>
+
+    <delete id="deleteArticle" parameterType="int">
+        delete from t_tran3_article where articleId = #{articleId}
+    </delete>
 
 
 </mapper>

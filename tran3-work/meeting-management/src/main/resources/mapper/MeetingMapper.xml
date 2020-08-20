@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.meeting.mapper.MeetingMapper">
+
+    <select id="queryMeetingList" resultType="com.fh.meeting.model.Meeting">
+        select *  from w_meeting m left join w_room r on m.roomId=r.roomId
+    </select>
+    <insert id="addMeeting" parameterType="com.fh.meeting.model.Meeting">
+        insert into w_meeting(meetingTheme,conferee,meetingMinDate,meetingMaxDate,roomId,meetingType,compere,recorder,registrant,photo,meetingSafeWhad,meetingWhad,meetingState)
+        values (#{meetingTheme}, #{conferee}, #{meetingMinDate}, #{meetingMaxDate}, #{roomId},#{meetingType},#{compere},#{recorder},#{registrant},#{photo},#{meetingSafeWhad},#{meetingWhad},#{meetingState})
+    </insert>
+    <delete id="deleteBatch">
+        delete from  w_meeting where meetingId in
+        <foreach collection="list" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+
+    </delete>
+
+    <delete id="deleteMeeting">
+        delete from  w_meeting where meetingId =#{meetingId}
+    </delete>
+
+    <update id="updateMeeting" parameterType="meeting">
+    update w_meeting set meetingTheme=#{meetingTheme},conferee=#{conferee}, meetingMinDate=#{meetingMinDate},meetingMaxDate=#{meetingMaxDate},roomId=#{roomId},roomName=#{roomName},meetingType=#{meetingType},compere=#{compere},recorder=#{recorder},registrant=#{registrant},photo=#{photo},meetingSafeWhad=#{meetingSafeWhad},meetingWhad=#{meetingWhad},meetingState=#{meetingState},registerTime=#{registerTime}
+        where meetingId=#{meetingId}
+    </update>
+</mapper>

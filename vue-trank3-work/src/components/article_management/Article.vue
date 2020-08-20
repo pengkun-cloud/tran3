@@ -1,5 +1,6 @@
 <template>
     <div>
+      <el-button type="primary" v-on:click="toAdd">物品入库</el-button>
       <!--查询-->
       <el-table
         ref="tb"
@@ -81,6 +82,95 @@
         :total=totalCount>
       </el-pagination>
 
+      <!--添加-->
+      <el-dialog
+        title="增加"
+        :visible.sync="dialogAddVisible">
+        <el-form :model="article">
+
+          <el-form-item label="物品名称" label-width="120px">
+            <el-input v-model="article.articleName" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="价格" label-width="120px">
+            <el-input v-model="article.articlePrice" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="数量" label-width="120px">
+            <el-input v-model="article.articleCount" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="入库人" label-width="120px">
+            <el-input v-model="article.storeMember" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="入库时间" label-width="120px">
+            <div class="block">
+              <el-date-picker
+                v-model="article.storeDate"
+                type="date"
+                value-format="yyyy-MM-dd"
+                placeholder="选择日期">
+              </el-date-picker>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="特殊说明" label-width="120px">
+            <el-input v-model="article.information" autocomplete="off"></el-input>
+          </el-form-item>
+
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogAddVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addArticle">确 定</el-button>
+        </span>
+      </el-dialog>
+
+      <!--修改-->
+      <el-dialog
+        title="修改"
+        :visible.sync="dialogUpdateVisible">
+        <el-form :model="article">
+
+          <el-form-item label="物品名称" label-width="120px">
+            <el-input v-model="article.articleName" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="价格" label-width="120px">
+            <el-input v-model="article.articlePrice" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="数量" label-width="120px">
+            <el-input v-model="article.articleCount" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="入库人" label-width="120px">
+            <el-input v-model="article.storeMember" autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="入库时间" label-width="120px">
+            <div class="block">
+              <el-date-picker
+                v-model="article.storeDate"
+                type="date"
+                value-format="yyyy-MM-dd"
+                placeholder="选择日期">
+              </el-date-picker>
+            </div>
+          </el-form-item>
+
+          <el-form-item label="特殊说明" label-width="120px">
+            <el-input v-model="article.information" autocomplete="off"></el-input>
+          </el-form-item>
+
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="cancelUpdate">取 消</el-button>
+          <el-button type="primary" @click="updateArticle">确 定</el-button>
+        </span>
+      </el-dialog>
+
+
     </div>
 </template>
 
@@ -93,15 +183,45 @@
           multipleSelection:[],
           param:{
             start:0,
-            pageSize:2,
+            pageSize:4,
           },
-          totalCount:0
+          totalCount:0,
+
+          dialogAddVisible:false,
+          article:{
+            articleId:"",
+            articleName:"",
+            articlePrice:"",
+            articleCount:"",
+            storeMember:"",
+            storeDate:"",
+            information:"",
+          },
+
+          dialogUpdateVisible:false,
+
+
         }
       },
       created(){
         this.queryList();
       },
       methods:{
+        //增加
+        toAdd(){
+          this.dialogAddVisible = true;
+          this.article = {}
+        },
+        addArticle(){
+          var self = this;
+          this.$axios.post("http://localhost:8100/article/addArticle",this.$qs.stringify(this.article)).then(function(res){
+            if(res.data.code==200){
+              self.article = {};
+              self.dialogAddVisible = false;
+              self.queryList();
+            }
+          })
+        },
         //查询
         queryList(){
           var self = this;
@@ -120,10 +240,33 @@
         //回显
         handleEdit(index, row){
           console.log(index, row);
+          this.article = row;
+          this.dialogUpdateVisible = true;
+        },
+        cancelUpdate(){
+          this.article = {};
+          this.dialogUpdateVisible = false;
+        },
+        //修改
+        updateArticle(){
+          var self = this;
+          this.$axios.post("http://localhost:8100/article/updateArticle",this.$qs.stringify(this.article)).then(function(res){
+            if(res.data.code==200){
+              self.article = {};
+              self.dialogUpdateVisible = false;
+              self.queryList();
+            }
+          })
         },
         //删除
         handleDelete(index, row){
-          console.log(index, row);
+          //console.log(index, row);
+          var self = this;
+          this.$axios.post("http://localhost:8100/article/deleteArticle/" + row.articleId,this.$qs.stringify()).then(function(res){
+            if(res.data.code==200){
+              self.queryList();
+            }
+          })
         },
         //多选框
         handleSelectionChange(){

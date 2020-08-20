@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ArchivesManagementApplication {
+public class RecordApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ArchivesManagementApplication.class, args);
+        SpringApplication.run(RecordApplication.class, args);
     }
 
 }

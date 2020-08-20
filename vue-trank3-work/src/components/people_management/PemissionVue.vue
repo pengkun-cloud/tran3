@@ -22,7 +22,7 @@
 
           <el-table-column
             label="路径"
-            width="100">
+            width="200">
             <template slot-scope="scope">
               <span style="margin-left: 10px">{{ scope.row.url}}</span>
             </template>

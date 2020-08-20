@@ -1,17 +1,51 @@
 package com.fh.meeting.controller;
 
+import com.fh.meeting.common.ServerResponse;
+import com.fh.meeting.model.Meeting;
 import com.fh.meeting.service.MeetingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("meeting")
+@CrossOrigin
 public class MeetingController {
     @Autowired
     private MeetingService meetingService;
 
+
+    //查询会议管理
+    @RequestMapping("queryMeetingList")
+    public ServerResponse queryMeetingList(){
+        return meetingService.queryMeetingList();
+    }
+
+
+    @RequestMapping("addMeeting")
+    public ServerResponse addMeeting(Meeting meeting){
+        return meetingService.addMeeting(meeting);
+    }
+
+    @RequestMapping("deleteMeeting/{meetingId}")
+    public ServerResponse deleteMeeting(@PathVariable("meetingId") Integer meetingId){
+        meetingService.deleteMeeting(meetingId);
+        return  ServerResponse.success();
+    }
+    //批量删
+    @RequestMapping("deleteBatch")
+    public ServerResponse deleteBatch(@RequestParam("idList") List list){
+        meetingService.deleteBatch(list);
+        return  ServerResponse.success();
+
+    }
+    @RequestMapping("updateMeeting")
+    public ServerResponse updateMeeting(Meeting meeting){
+        meetingService.updateMeeting(meeting);
+        return  ServerResponse.success();
+
+    }
 
 }

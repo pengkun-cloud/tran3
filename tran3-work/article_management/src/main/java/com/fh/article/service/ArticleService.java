@@ -9,4 +9,11 @@ import java.util.List;
 public interface ArticleService {
 
     ServerResponse queryList(Param param);
+
+    ServerResponse addArticle(Article article);
+
+    ServerResponse updateArticle(Article article);
+
+    ServerResponse deleteArticle(Integer articleId);
+
 }
