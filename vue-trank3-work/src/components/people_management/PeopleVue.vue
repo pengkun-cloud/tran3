@@ -133,8 +133,14 @@
               <el-input v-model="personnel.name" style="width: 260px"></el-input>
             </el-form-item>
 
-            <el-form-item label="用户部门:">
-              <el-input v-model="personnel.department" style="width: 260px"></el-input>
+            <el-form-item label="用户部门" :label-width="formLabelWidth">
+              <el-select v-model="personnel.department" placeholder="请选择">
+                <el-option v-for="item in departmentList"
+                           :key="item.id"
+                           :label="item.name"
+                           :value="item.id">
+                </el-option>
+              </el-select>
             </el-form-item>
 
             <el-form-item label="用户密级:">
@@ -205,15 +211,21 @@
             roleid:"",
             rolename:"",
           },
+          department:{
+            id:"",
+            name:"",
+          },
           formLabelWidth:"120px",
           dialogFormVisible: false,
           personnelList:[],
           roleList:[],
+          departmentList:[],
         }
       },
       created:function(){
         this.queryPersonneList();
         this.queryRoleList();
+        this.queryDepartmentList();
 
       },
       methods: {
@@ -230,6 +242,17 @@
           this.$axios.post("http://localhost:8085/role/queryRole").then(function (response) {
             console.log(response.data.data);
             self.roleList = response.data.data;
+          })
+        },
+
+        queryDepartmentList(){
+          var self = this;
+          this.$axios.post("http://localhost:8085/department/queryDepartment").then(function (response) {
+            if(response.code = 200){
+              console.log(response.data.data);
+              self.departmentList = response.data.data;
+            }
+
           })
         },
 
