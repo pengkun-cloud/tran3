@@ -4,6 +4,7 @@ import com.fh.FilesSecret.mapper.SecretMapper;
 import com.fh.FilesSecret.model.Secret;
 import com.fh.commom.ServerResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,7 +15,7 @@ public class SecretServiceImpl implements SecretService{
     @Resource
     private SecretMapper secretmapper;
 
-
+    @Transactional
     @Override
     public ServerResponse querysecret() {
         ServerResponse serverresponse=null;
@@ -29,7 +30,7 @@ public class SecretServiceImpl implements SecretService{
         }
 
     }
-
+    @Transactional
     @Override
     public ServerResponse addsecret(Secret sec) {
         ServerResponse serverresponse=null;
@@ -44,6 +45,7 @@ public class SecretServiceImpl implements SecretService{
         }
     }
 
+    @Transactional
     @Override
     public ServerResponse updatesecret(Secret sec) {
         ServerResponse serverresponse=null;
@@ -58,6 +60,7 @@ public class SecretServiceImpl implements SecretService{
         }
     }
 
+    @Transactional
     @Override
     public ServerResponse deletsecret(Integer secid) {
         ServerResponse serverresponse=null;
@@ -72,6 +75,7 @@ public class SecretServiceImpl implements SecretService{
         }
     }
 
+    @Transactional
     @Override
     public ServerResponse huixiansecret(Integer secid) {
         ServerResponse serverresponse=null;

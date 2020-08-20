@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+   例如namespace="com.szh.mapper.personMapper"就是com.szh.mapper(包名)+personMapper(personMapper.xml文件去除后缀) -->
+<mapper namespace="com.fh.MarketManagement.mapper.MarketMapper">
+
+    <!--查询市场管理SQL-->
+    <select id="querymar" resultType="com.fh.MarketManagement.model.Market">
+      select * from t_market
+    </select>
+
+    <!--添加市场管理SQL-->
+    <insert id="addmar" parameterType="com.fh.MarketManagement.model.Market">
+    insert into t_market
+    (marName,marArea,marParticulars)
+    values
+    (#{marName},#{marArea},#{marParticulars})
+    </insert>
+
+    <!--回显市场管理SQL-->
+    <select id="huixianmar" parameterType="int" resultType="com.fh.MarketManagement.model.Market">
+        select * from t_market
+      where marId=#{marId}
+    </select>
+
+    <!--修改市场管理SQL-->
+    <update id="updatemar" parameterType="com.fh.MarketManagement.model.Market">
+        update t_market set marName=#{marName},marArea=#{marArea},marParticulars=#{marParticulars}
+        where marId=#{marId}
+    </update>
+
+    <!--删除市场管理SQL-->
+    <delete id="deletemar" parameterType="int">
+        delete from t_market where marId=#{marId}
+    </delete>
+
+    <!--批量删除市场管理SQL-->
+    <delete id="deleteallmar" parameterType="list">
+        delete from t_market where marId in
+        <foreach collection="list" open="(" item="item" close=")" separator=",">
+          #{item}
+        </foreach>
+    </delete>
+
+</mapper>
