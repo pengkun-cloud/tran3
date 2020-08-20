@@ -15,4 +15,11 @@ public interface ArticleMapper {
 
     long queryTotalCount(Param param);
 
+    void addArticle(Article article);
+
+    void updateArticle(Article article);
+
+    void deleteArticle(Integer articleId);
+
+
 }
