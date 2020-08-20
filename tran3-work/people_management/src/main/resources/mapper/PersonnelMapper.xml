@@ -10,8 +10,8 @@
     </select>
 
     <insert id="addPersonnel" parameterType="com.fh.personnel.medol.Personnel">
-        insert into t_personnel(numbering,name,department,security,sex,age,professional,roleid)
-        VALUES (#{numbering},#{name},#{department},#{security},#{sex},#{age},#{professional},#{roleid})
+        insert into t_personnel(numbering,name,department,security,sex,age,professional,roleid,password)
+        VALUES (#{numbering},#{name},#{department},#{security},#{sex},#{age},#{professional},#{roleid},#{password})
     </insert>
 
     <update id="updatePersonnel" parameterType="com.fh.personnel.medol.Personnel">
@@ -22,5 +22,9 @@
     <delete id="delPersonnel">
           delete from t_personnel where id=#{id}
     </delete>
+
+    <select id="getPersonnelByName" resultType="com.fh.personnel.medol.Personnel">
+        select * from t_personnel where name = #{name}
+    </select>
 
 </mapper>

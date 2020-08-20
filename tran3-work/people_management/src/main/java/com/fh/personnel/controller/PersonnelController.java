@@ -27,7 +27,15 @@ public class PersonnelController {
         if(personnel.getId()!=null){
             personnelService.updatePersonnel(personnel);
         }else{
-            personnelService.addPersonnel(personnel);
+
+            if(personnel.getPassword()!=null){
+                personnelService.addPersonnel(personnel);
+            }else{
+                personnel.setPassword("123");
+                personnelService.addPersonnel(personnel);
+            }
+
+
         }
         return ServerResponse.scuess();
     }
