@@ -1,5 +1,6 @@
 package com.fh.meeting.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,13 +14,15 @@ public class Meeting {
     private String meetingTheme;
     //参会人员
     private String conferee;
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date meetingMinDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date meetingMaxDate;
     //会议室
     private Integer roomId;
+    //会议室
+    @TableField(exist = false)
+    private String roomName;
     //会议类型
     private Integer meetingType;
     //主持人
@@ -31,6 +34,7 @@ public class Meeting {
     //登记时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date registerTime;
+
     //附件
     private String photo;
     //会议保障内容
