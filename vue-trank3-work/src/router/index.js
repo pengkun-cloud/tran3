@@ -2,6 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import admin from '@/components/admin'
 import PeopleVue from '@/components/people_management/PeopleVue'
+import PemissionVue from '@/components/people_management/PemissionVue'
+import RoleVue from '@/components/people_management/RoleVue'
+import DepartmentVue from '@/components/people_management/DepartmentVue'
+import Article from '@/components/article_management/Article'
+import Category from '@/components/category_management/CategoryVue'
+
 
 
 Vue.use(Router)
@@ -18,8 +24,33 @@ export default new Router({
           path: '/PeopleVue',
           name: 'PeopleVue',
           component: PeopleVue,
+        },
+        {
+          path: '/PemissionVue',
+          name: 'PemissionVue',
+          component: PemissionVue,
+        },
+        {
+          path: '/RoleVue',
+          name: 'RoleVue',
+          component: RoleVue,
+        },
+        {
+          path: '/DepartmentVue',
+          name: 'DepartmentVue',
+          component: DepartmentVue,
+        },
+        {
+          path: '/Article',
+          name: 'Article',
+          component: Article,
+        },
+        // 考勤类别
+        {
+          path: '/category',
+          name: 'Category',
+          component: Category,
         }
-
       ]
     },
 
