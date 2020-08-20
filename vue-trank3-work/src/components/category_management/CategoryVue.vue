@@ -24,7 +24,7 @@
 
       <el-table-column label="考勤类别">
         <template slot-scope="scope">
-          {{ scope.row.name }}
+          {{ scope.row.categoryName }}
         </template>
       </el-table-column>
 
@@ -39,9 +39,9 @@
     <!--==============================================================新增============================-->
     <el-dialog title="新增图书" :visible.sync="addForm">
       <el-form :model="form" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="类别名称" prop="name">
+        <el-form-item label="类别名称" prop="categoryName">
           <el-col :span="11">
-            <el-input v-model="form.name" style="width: 100%"></el-input>
+            <el-input v-model="form.categoryName" style="width: 100%"></el-input>
           </el-col>
         </el-form-item>
       </el-form>
@@ -54,9 +54,9 @@
     <!--============================================================== 修改 ============================-->
     <el-dialog title="修改类别信息" :visible.sync="updateForm">
       <el-form :model="uform" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="类别名称" prop="name">
+        <el-form-item label="类别名称" prop="categoryName">
           <el-col :span="11">
-            <el-input v-model="uform.name" style="width: 100%"></el-input>
+            <el-input v-model="uform.categoryName" style="width: 100%"></el-input>
           </el-col>
         </el-form-item>
       </el-form>
@@ -80,10 +80,10 @@
                 addForm: false,
                 updateForm: false,
                 form:{
-                    name: ''
+                    categoryName: ''
                 },
                 uform:{
-                    name: ''
+                    categoryName: ''
                 }
             }
         },
@@ -114,20 +114,20 @@
             },
             // 清空form表单
             clearAddForm(){
-              this.form.name=''
-                this.addForm = false
-                this.queryCategoryList()
+              this.form.categoryName=''
+              this.addForm = false
+              this.queryCategoryList()
             },
             //回显
             toUpdateCategory(id){
                 var self = this
                 this.$axios.get("http://localhost:8088/category/queryCategoryById?id="+id).then(function (res) {
                     self.uform.id = res.data.data.id
-                    self.uform.name = res.data.data.name
+                    self.uform.categoryName = res.data.data.categoryName
                     self.updateForm = true
                 })
             },
-            //修改衣服信息
+            //修改类别信息
             updateCategory(){
                 var self = this
                 this.updateForm = false
@@ -141,7 +141,7 @@
                       self.queryCategoryList()
                   })
             },
-            //删除衣服信息
+            //删除类别信息
             deleteCategory(id){
                 var self = this
                 this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
@@ -178,7 +178,7 @@
                             //将遍历出来的值放到自定义的数组里面
                             ids.push(data.id)
                         })
-                        this.$axios.post("wyApi/category/deleteBatchCategory",this.$qs.stringify({"ids":ids},{indices: false})).then(function (res) {
+                        this.$axios.post("http://localhost:8088/category/deleteBatchCategory",this.$qs.stringify({"ids":ids},{indices: false})).then(function (res) {
                             self.$message.success("删除成功")
                             self.queryCategoryList()
                         }).catch(function () {
