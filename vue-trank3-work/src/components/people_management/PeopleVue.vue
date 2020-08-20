@@ -1,38 +1,8 @@
 <template>
     <div>
-      <div style="height: 20%">
-        查询条件
-        <el-form :model="param"  ref="ruleForm" label-width="100px" class="demo-ruleForm">
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="用户编号:" prop="name">
-                <el-col :span="20">
-                <el-input  v-model="param.numbering" ></el-input>
-                </el-col>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="8">
-              <el-form-item label="用户名称:" prop="checkPass">
-                <el-col :span="20">
-                  <el-input   v-model="param.name"></el-input>
-                </el-col>
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-          <el-form-item>
-            <el-button type="primary" @click="submitForm()">提交</el-button>
-            <el-button @click="resetForm('queryMovie')">重置</el-button>
-          </el-form-item>
-            </el-col>
-          </el-row>
-
-        </el-form>
-
-      </div>
       <div>
       <br style="height: 80%">
-        用户列表<br>
+
       <el-button type="primary" @click="tankuang()">添加</el-button>
         <el-table
           :data="personnelList"

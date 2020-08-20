@@ -4,12 +4,14 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/springcloud-eureka/pom.xml" />
-        <option value="$PROJECT_DIR$/springcloud-zuul/pom.xml" />
         <option value="$PROJECT_DIR$/people_management/pom.xml" />
         <option value="$PROJECT_DIR$/personal_management/pom.xml" />
         <option value="$PROJECT_DIR$/car-management/pom.xml" />
         <option value="$PROJECT_DIR$/attendance_management/pom.xml" />
         <option value="$PROJECT_DIR$/meeting-management/pom.xml" />
+        <option value="$PROJECT_DIR$/article_management/pom.xml" />
+        <option value="$PROJECT_DIR$/record/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-zuul/pom.xml" />
       </list>
     </option>
   </component>
