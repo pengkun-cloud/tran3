@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.category.mapper.CategoryMapper">
+
+    <!-- 查询类别列表 -->
+    <select id="queryCategoryList" resultType="com.fh.category.model.Category">
+      select * from t_category
+    </select>
+
+    <!-- 新增类别 -->
+    <insert id="addCategory" parameterType="com.fh.category.model.Category">
+        insert into t_category (categoryName) values (#{categoryName})
+    </insert>
+
+    <!-- 回显 -->
+    <select id="queryCategoryById" parameterType="int" resultType="com.fh.category.model.Category">
+        select * from t_category where id = #{id}
+    </select>
+
+    <!-- 修改 -->
+    <update id="updateCategory" parameterType="com.fh.category.model.Category">
+        update t_category set categoryName = #{categoryName} where id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteCategory" parameterType="int">
+        delete from t_category where id = #{id}
+    </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatchCategory" parameterType="list">
+        delete from t_category where id in
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -2,12 +2,14 @@ package com.fh;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-public class ArchivesManagementApplication {
+@EnableEurekaClient
+public class MeetingManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ArchivesManagementApplication.class, args);
+        SpringApplication.run(MeetingManagementApplication.class, args);
     }
 
 }

@@ -7,6 +7,9 @@ import RoleVue from '@/components/people_management/RoleVue'
 import DepartmentVue from '@/components/people_management/DepartmentVue'
 import Article from '@/components/article_management/Article'
 import Category from '@/components/category_management/CategoryVue'
+import Attendance from '@/components/category_management/AttendanceVue'
+import Meeting from '@/components/meeting-management/Meeting'
+import Room from '@/components/meeting-management/Room'
 
 
 
@@ -50,6 +53,22 @@ export default new Router({
           path: '/category',
           name: 'Category',
           component: Category,
+        },
+        // 考勤信息
+        {
+          path: '/attendance',
+          name: 'Attendance',
+          component: Attendance,
+        },
+        {
+          path: '/Meeting',
+          name: 'Meeting',
+          component: Meeting,
+        },
+        {
+          path: '/Room',
+          name: 'Room',
+          component: Room,
         }
       ]
     },

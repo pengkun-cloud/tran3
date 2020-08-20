@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.attendance.mapper.AttendanceMapper">
+
+    <!-- 查询考勤列表 -->
+    <select id="queryAttendanceList" resultType="com.fh.attendance.model.Attendance">
+        select ta.*,tc.categoryName from t_attendance ta left join t_category tc on ta.category = tc.id
+        <where>
+            <if test="roleName != null and roleName != ''">
+                and roleName like concat('%',#{roleName},'%')
+            </if>
+            <if test="minDate != null">
+                and attWriteTime &gt;= #{minDate}
+            </if>
+            <if test="maxDate != null">
+                and attWriteTime &lt;= #{maxDate}
+            </if>
+        </where>
+    </select>
+
+    <!-- 新增考勤 -->
+    <insert id="addAttendance" parameterType="com.fh.attendance.model.Attendance">
+        insert into t_attendance (roleName,attCoding,attDays,attManHour,attWriteTime,attExplain,category,department)
+            values (#{roleName},#{attCoding},#{attDays},#{attManHour},#{attWriteTime},#{attExplain},#{category},#{department})
+    </insert>
+
+    <!-- 回显 -->
+    <select id="queryAttendanceById" parameterType="int" resultType="com.fh.attendance.model.Attendance">
+        select * from t_attendance where id = #{id}
+    </select>
+
+    <!-- 修改 -->
+    <update id="updateAttendance" parameterType="com.fh.attendance.model.Attendance">
+        update t_attendance set roleName = #{roleName},attCoding = #{attCoding},attDays = #{attDays},attManHour = #{attManHour},attWriteTime = #{attWriteTime},
+            attExplain = #{attExplain},category = #{category},department = #{department} where id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteAttendance" parameterType="int">
+        delete from t_attendance where id = #{id}
+    </delete>
+
+    <!-- 批量删除 -->
+    <delete id="deleteBatchAttendance" parameterType="list">
+        delete from t_attendance where id in
+            <foreach collection="list" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+    </delete>
+
+</mapper>
