@@ -17,4 +17,6 @@ public interface PersonnelMapper {
     void delPersonnel(Integer id);
 
     Personnel getPersonnelByName(String name);
+
+    void updatePassword(Personnel personnel);
 }
