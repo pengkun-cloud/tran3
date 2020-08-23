@@ -58,12 +58,12 @@
 
           if(response.data.code==200){
             Cookies.set("token",response.data.data)
-
             self.$router.push("/PeopleVue");
-
+            location.reload();
           }
         })
       }
+
     }
   }
 </script>

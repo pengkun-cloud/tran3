@@ -15,7 +15,28 @@ import QS from 'qs'
 Vue.prototype.$axios = axios
 Vue.prototype.$qs = QS
 
+//引入js-cookie
+import Cookies from 'js-cookie'
 
+// 把cooke发送到服务器
+axios.defaults.withCredentials = false
+
+axios.default.withCredentials = true
+
+axios.interceptors.request.use(function (config) {
+  var token = Cookies.get('token')
+  config.headers['x-auth'] = token
+  console.log(config)
+  return config
+})
+axios.interceptors.response.use(function (config) {
+  // if (config.data.code === 202) {
+  //   location.href = '/LoginVue'
+  // }
+
+  return config
+  // return config
+})
 
 
 Vue.config.productionTip = false

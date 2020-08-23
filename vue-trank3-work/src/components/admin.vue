@@ -1,4 +1,5 @@
 <template>
+  <div>
   <el-container>
     <el-header class="headStyle">
       <el-menu
@@ -13,7 +14,12 @@
           <i class="el-icon-platform-eleme"></i>
           <span>协同办公系统</span>
         </el-menu-item>
-        <el-link type = "info" v-on:click="quit" style = "float: right; margin-right: 20px; margin-top: 15px">退出</el-link>
+        <div style="padding-top: 10px">
+          <el-link type = "info" v-on:click="quit" style = "float: right; margin-right: 20px; margin-top: 15px">退出</el-link>
+          <el-link type="warning" v-on:click="tankuang" style = "float: right; margin-right: 20px; margin-top: 15px">修改密码</el-link>
+          <el-link type="primary" v-on:click="quit" style = "float: right; margin-right: 20px; margin-top: 15px">欢迎你，{{personnel.numbering}}</el-link>
+        </div>
+
       </el-menu>
     </el-header>
     <el-container>
@@ -126,18 +132,88 @@
           </el-menu>
         </el-col>
       </el-aside>
-      <el-main><router-view></router-view></el-main>
+      <el-main><router-view></router-view>
+
+
+        <div>
+          <el-dialog title="员工" :visible.sync="dialogFormVisible">
+          <el-form :model="personnels" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+
+            <el-form-item label="密码:" prop="password">
+              <el-input type="password" v-model="personnels.password" autocomplete="off" style="width: 260px"></el-input>
+            </el-form-item>
+            <el-form-item label="确认密码:" prop="checkpassword">
+              <el-input type="password" v-model="personnels.checkpassword" autocomplete="off" style="width: 260px"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" style="margin-left: 30px" @click="updatepassword('ruleForm')">提交</el-button>
+              <el-button style="margin-left: 30px" @click="dialogFormVisible = false">取消</el-button>
+            </el-form-item>
+          </el-form>
+          </el-dialog>
+        </div>
+
+      </el-main>
     </el-container>
   </el-container>
+
+
+</div>
 </template>
 
 <script>
   export default {
     name: 'Shop-admin',
+    data() {
+      return {
+        personnel:"",
+        dialogFormVisible:false,
+        personnels:{
+          password:"",
+          checkpassword:"",
+
+        },
+      }
+    },
     created(){
+      if(this.personnel.numbering == null){
+        this.queryPersonne();
+      }
 
     },
     methods: {
+
+      queryPersonne(){
+        var self = this;
+        this.$axios.post("http://localhost:8085/login/longinPersonnel").then(function (response) {
+
+          console.log(response.data.data);
+          self.personnel = response.data.data;
+        })
+      },
+      updatepassword(){
+
+        if(this.personnels.password!=null){
+          if(this.personnels.password !== this.personnels.checkpassword){
+            alert("两次密码不一致")
+          }else{
+            var self = this;
+            this.personnel.password = this.personnels.password
+            this.$axios.post("http://localhost:8085/personnel/updatePassword",this.$qs.stringify(this.personnel)).then(function (response) {
+
+                self.dialogFormVisible=false;
+
+            })
+          }
+        }else{
+          alert("密码不能为空")
+        }
+
+      },
+
+      tankuang:function (index, row) {
+        this.dialogFormVisible=true;
+      },
       quit(){
 
       },

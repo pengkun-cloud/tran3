@@ -193,6 +193,7 @@
         }
       },
       created:function(){
+
         this.queryPersonneList();
         this.queryRoleList();
         this.queryDepartmentList();

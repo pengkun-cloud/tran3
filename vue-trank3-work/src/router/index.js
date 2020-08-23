@@ -71,7 +71,7 @@ export default new Router({
           component: Room,
         },
         {
-          path: '/',
+          path: '/LoginVue',
           name: 'LoginVue',
           component: LoginVue,
         }
