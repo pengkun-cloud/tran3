@@ -13,4 +13,6 @@ public interface PersonnelService {
     void delPersonnel(Integer id);
 
     Personnel getPersonnelByName(String name);
+
+    void updatePassword(Personnel personnel);
 }

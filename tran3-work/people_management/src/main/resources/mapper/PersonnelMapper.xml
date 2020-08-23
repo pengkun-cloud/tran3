@@ -19,6 +19,11 @@
         where id = #{id}
     </update>
 
+    <update id="updatePassword" parameterType="com.fh.personnel.medol.Personnel">
+         UPDATE t_personnel SET password = #{password}
+        where id = #{id}
+    </update>
+
     <delete id="delPersonnel">
           delete from t_personnel where id=#{id}
     </delete>

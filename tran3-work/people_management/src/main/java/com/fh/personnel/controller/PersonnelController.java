@@ -46,4 +46,11 @@ public class PersonnelController {
         personnelService.delPersonnel(id);
         return ServerResponse.scuess();
     }
+
+    @RequestMapping("updatePassword")
+    public ServerResponse updatePassword(Personnel personnel){
+        personnelService.updatePassword(personnel);
+        return ServerResponse.scuess();
+    }
+
 }

@@ -45,4 +45,11 @@ public class PersonnelServiceImpl implements PersonnelService {
         return personnel;
     }
 
+    @Override
+    public void updatePassword(Personnel personnel) {
+        personnelMapper.updatePassword(personnel);
+    }
+
+
+
 }
