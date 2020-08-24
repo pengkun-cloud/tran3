@@ -25,6 +25,7 @@ public class MeetingController {
     public ServerResponse queryMeetingList(MeetingParam meetingParam){
         long totalCount = meetingService.selectCountt(meetingParam);
         List<Meeting> meetingList=meetingService.queryMeetingList(meetingParam);
+
         Map<String,Object> map =new HashMap();
         map.put("totalCount",totalCount);
         map.put("meetingList",meetingList);
