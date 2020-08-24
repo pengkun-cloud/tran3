@@ -2,11 +2,12 @@ package com.fh.room.service;
 
 import com.fh.meeting.common.ServerResponse;
 import com.fh.room.model.Room;
+import com.fh.room.param.RoomParam;
 
 import java.util.List;
 
 public interface  RoomService {
-    ServerResponse queryRoomList();
+    List<Room> queryRoomList(RoomParam roomParam);
 
     ServerResponse roomById(Integer roomId);
 
@@ -17,4 +18,6 @@ public interface  RoomService {
     void deleteBatch(List list);
 
     void updateRoom(Room room);
+
+    long selectCountt(RoomParam roomParam);
 }

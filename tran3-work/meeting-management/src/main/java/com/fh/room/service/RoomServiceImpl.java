@@ -3,6 +3,7 @@ package com.fh.room.service;
 import com.fh.meeting.common.ServerResponse;
 import com.fh.room.mapper.RoomMapper;
 import com.fh.room.model.Room;
+import com.fh.room.param.RoomParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,8 @@ public class RoomServiceImpl implements RoomService {
     private RoomMapper roomMapper;
 
     @Override
-    public ServerResponse queryRoomList() {
-        List<Room> roomList = roomMapper.queryRoomList();
-        return ServerResponse.success(roomList);
+    public List<Room> queryRoomList(RoomParam roomParam) {
+        return roomMapper.queryRoomList(roomParam);
     }
 
     @Override
@@ -45,5 +45,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void updateRoom(Room room) {
         roomMapper.updateRoom(room);
+    }
+
+    @Override
+    public long selectCountt(RoomParam roomParam) {
+        return roomMapper.selectCountt(roomParam);
     }
 }

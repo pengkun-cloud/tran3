@@ -2,6 +2,7 @@ package com.fh.meeting.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.fh.meeting.model.Meeting;
+import com.fh.meeting.param.MeetingParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Repository
 public  interface MeetingMapper extends BaseMapper<Meeting> {
 
-    List<Meeting> queryMeetingList();
+    List<Meeting> queryMeetingList(MeetingParam meetingParam);
 
     void addMeeting(Meeting meeting);
 
@@ -21,4 +22,6 @@ public  interface MeetingMapper extends BaseMapper<Meeting> {
     void deleteBatch(List list);
 
     void updateMeeting(Meeting meeting);
+
+    long selectCountt(MeetingParam meetingParam);
 }

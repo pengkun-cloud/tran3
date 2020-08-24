@@ -3,8 +3,6 @@ package com.fh.meeting.controller;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
 import com.fh.meeting.common.ServerResponse;
-import com.fh.meeting.service.MeetingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,8 +14,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("file")
 public class FileController {
-    @Autowired
-    private MeetingService meetingService;
 
     @RequestMapping("uploadToOSS")
     public ServerResponse uploadToOSS(MultipartFile file){

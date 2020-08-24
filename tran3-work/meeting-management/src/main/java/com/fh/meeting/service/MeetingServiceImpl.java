@@ -3,10 +3,14 @@ package com.fh.meeting.service;
 import com.fh.meeting.common.ServerResponse;
 import com.fh.meeting.mapper.MeetingMapper;
 import com.fh.meeting.model.Meeting;
+import com.fh.meeting.param.MeetingParam;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MeetingServiceImpl implements MeetingService{
@@ -15,9 +19,8 @@ public class MeetingServiceImpl implements MeetingService{
     private MeetingMapper meetingMapper;
 
     @Override
-    public ServerResponse queryMeetingList() {
-        List<Meeting> meetingList=meetingMapper.queryMeetingList();
-        return ServerResponse.success(meetingList);
+    public List<Meeting> queryMeetingList(MeetingParam meetingParam) {
+        return meetingMapper.queryMeetingList(meetingParam);
     }
 
     @Override
@@ -39,5 +42,10 @@ public class MeetingServiceImpl implements MeetingService{
     @Override
     public void updateMeeting(Meeting meeting) {
         meetingMapper.updateMeeting(meeting);
+    }
+
+    @Override
+    public long selectCountt(MeetingParam meetingParam) {
+        return meetingMapper.selectCountt(meetingParam);
     }
 }

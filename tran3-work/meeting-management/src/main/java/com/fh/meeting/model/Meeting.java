@@ -1,6 +1,7 @@
 package com.fh.meeting.model;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,8 +16,10 @@ public class Meeting {
     //参会人员
     private String conferee;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date meetingMinDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date meetingMaxDate;
     //会议室
     private Integer roomId;
@@ -33,6 +36,7 @@ public class Meeting {
     private String registrant;
     //登记时间
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date registerTime;
 
     //附件

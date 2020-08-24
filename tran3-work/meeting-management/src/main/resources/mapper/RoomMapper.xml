@@ -4,10 +4,24 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.fh.room.mapper.RoomMapper">
+    <sql id="sqlWhere">
+        <where>
 
+            <if test="roomName !=null and roomName !=''">
+                r.roomName like concat("%",#{roomName},"%")
+            </if>
 
-    <select id="queryRoomList" resultType="com.fh.room.model.Room">
-        select *  from w_room
+        </where>
+
+    </sql>
+
+    <select id="queryRoomList" resultType="com.fh.room.model.Room" parameterType="com.fh.room.param.RoomParam">
+        select *  from w_room r
+        <include refid="sqlWhere"></include>
+        limit #{start},#{pageSize}
+    </select>
+    <select id="selectCountt" resultType="long" parameterType="com.fh.room.param.RoomParam">
+        select count(*) from w_room
     </select>
 
     <insert id="addRoom" parameterType="com.fh.room.model.Room">
