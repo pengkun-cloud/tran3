@@ -174,7 +174,7 @@
       },
       queryRoomList(){
         var self = this;
-        this.$axios.post("/meeting/room/queryRoomList",this.$qs.stringify()).then(function(res){
+        this.$axios.post("http://localhost:8111/room/queryRoomList",this.$qs.stringify()).then(function(res){
           console.log(res.data.data)
           self.tableData = res.data.data
         })
@@ -190,7 +190,7 @@
       },
       addroom(){
         var self = this;
-        this.$axios.post("/meeting/room/addRoom",this.$qs.stringify(this.room)).then(function(res){
+        this.$axios.post("http://localhost:8111/room/addRoom",this.$qs.stringify(this.room)).then(function(res){
           if(res.data.code==200){
             self.dialogVisible = false;
             self.room = {};
@@ -200,7 +200,7 @@
       },
       handleDelete(index, row) {
         var self = this;
-        this.$axios.get("/meeting/room/deleteRoom/"+row.roomId,this.$qs.stringify(this.room)).then(function(res){
+        this.$axios.get("http://localhost:8111/room/deleteRoom/"+row.roomId,this.$qs.stringify(this.room)).then(function(res){
           if(res.data.code==200){
             self.queryRoomList();
           }
@@ -215,7 +215,7 @@
             delList.push(this.multipleSelection[i].roomId)
           }
 
-          this.$axios.post("/meeting/room/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
+          this.$axios.post("http://localhost:8111/room/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
             if(res.data.code==200){
               self.queryRoomList();
 
@@ -236,7 +236,7 @@
       },
       updateRoom(){
         var self = this;
-        this.$axios.post("/meeting/room/updateRoom",this.$qs.stringify(this.room)).then(function(res){
+        this.$axios.post("http://localhost:8111/room/updateRoom",this.$qs.stringify(this.room)).then(function(res){
           if(res.data.code==200){
             self.dialogUpdateVisible = false;
             self.room = {};
