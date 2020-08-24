@@ -12,6 +12,7 @@
         <module name="meeting-management" />
         <module name="people_management" />
         <module name="personal_management" />
+        <module name="property-management" />
         <module name="record" />
         <module name="springcloud-eureka" />
         <module name="springcloud-zuul" />
@@ -24,6 +25,7 @@
       <module name="meeting-management" target="1.8" />
       <module name="people_management" target="1.8" />
       <module name="personal_management" target="1.8" />
+      <module name="property-management" target="1.8" />
       <module name="record" target="1.8" />
       <module name="springcloud-eureka" target="1.8" />
       <module name="springcloud-zuul" target="1.8" />
