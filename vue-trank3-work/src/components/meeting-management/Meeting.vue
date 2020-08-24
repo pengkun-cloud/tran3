@@ -1,8 +1,47 @@
 <template>
   <div>
-    <el-button type="primary" v-on:click="toAdd">增加</el-button>
-    <el-button type="danger" size="small" v-on:click="deleteBatch">批量删除</el-button>
-    <!--回显 以及 到新增页面-->
+    <el-row>
+          <el-button type="primary" v-on:click="toAdd">增加</el-button>
+          <el-button type="danger" size="small" v-on:click="deleteBatch">批量删除</el-button>
+
+      <el-form :inline="true" :model="param" class="demo-form-inline">
+
+        <el-form-item label="会议主题">
+          <el-input v-model="param.meetingTheme" placeholder="会议主题"></el-input>
+        </el-form-item>
+
+
+        <el-form-item label="会议室名称">
+          <el-col :span="22">
+            <el-select v-model="param.roomId" placeholder="请选择">
+              <el-option
+                v-for="item in roomList"
+                :key="item.roomId"
+                :label="item.roomName"
+                :value="item.roomId">
+              </el-option>
+            </el-select>
+          </el-col>
+        </el-form-item>
+
+        <el-form-item label="会议开始时间">
+          <el-date-picker
+            v-model="param.data"
+            type="daterange"
+            value-format="yyyy-MM-dd"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期">
+          </el-date-picker>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button type="primary" @click="queryMeetingList" size="small" style="margin-left: 35px" round>查询</el-button>
+        </el-form-item>
+      </el-form>
+
+    </el-row>
+    <!--表格-->
     <el-table
       ref="tb"
       :data="tableData"
@@ -128,8 +167,15 @@
         </template>
       </el-table-column>
     </el-table>
-
-
+    <!--分页-->
+    <el-pagination
+      background
+      :pager-count="9"
+      layout="prev, pager, next"
+      @current-change="handleCurrentChange"
+      :page-size=param.pageSize
+      :total=totalCount>
+    </el-pagination>
     <!--增加 是否新增成功方法-->
     <el-dialog
       title="增加"
@@ -155,17 +201,18 @@
           </el-col>
         </el-row>
 
-
         <el-row :gutter="30">
           <el-col :lg="12" >
-        <el-form-item label="会议室" :label-width="formLabelWidth">
-          <div class="block">
-            <el-cascader
-              v-model="meeting.meetingRoomList"
-              :options="roomList"
-              :props="aprops"></el-cascader>
-          </div>
-        </el-form-item>
+            <el-form-item label="会议室名称">
+                <el-select v-model="meeting.roomId" placeholder="请选择">
+                  <el-option
+                    v-for="item in roomList"
+                    :key="item.roomId"
+                    :label="item.roomName"
+                    :value="item.roomId">
+                  </el-option>
+                </el-select>
+            </el-form-item>
           </el-col>
               <el-col :lg="12" >
         <el-form-item label="会议类型" :label-width="formLabelWidth">
@@ -258,16 +305,21 @@
 
         <el-row :gutter="30">
           <el-col :lg="12" >
-        <el-form-item label="会议室" :label-width="formLabelWidth">
-          <div class="block">
-            <el-cascader
-              v-model="meeting.meetingRoomList"
-              :options="roomList"
-              :props="aprops"></el-cascader>
-          </div>
-        </el-form-item>
+            <el-form-item label="会议室名称">
+              <el-select v-model="meeting.roomId" placeholder="请选择">
+                <el-option
+                  v-for="item in roomList"
+                  :key="item.roomId"
+                  :label="item.roomName"
+                  :value="item.roomId">
+                </el-option>
+              </el-select>
+            </el-form-item>
           </el-col>
-              <el-col :lg="12" >
+
+
+
+          <el-col :lg="12" >
         <el-form-item label="会议类型" :label-width="formLabelWidth">
           <el-radio v-model="meeting.meetingType" :label=1 >简洁</el-radio>
           <el-radio v-model="meeting.meetingType" :label=2 >高级</el-radio>
@@ -343,17 +395,23 @@
         photo:[],
         //表格展示
         tableData:[],
-
+        totalCount:0,
         //自定义的model对象《用户新增 修改调用》
+        param:{
+          data:"",
+          start:0,
+          pageSize:100,
+          meetingTheme:"",
+          minDate:"",
+          maxDate:"",
+          roomId:"",
+          roomName:"",
+        },
         meeting:{
-          meetingRoomList:[],
-          //会议Id
           //会议主题
           meetingTheme:"",
           //参会人员
           conferee:"",
-          meetingMinDate:"",
-          meetingMaxDate:"",
           roomId:"",
           meetingType:"",
           compere:"",
@@ -371,11 +429,6 @@
         formLabelWidth:"120px",
         roomList:[],
         meetingRoomList:[],
-        aprops:{
-          //会议室中字段
-          label:"roomName",
-          value:"roomId"
-        },
         multipleSelection:[],
       }
     },
@@ -402,22 +455,33 @@
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
-
+      handleCurrentChange(val) {
+        //  console.log(`当前页: ${val}`);
+        this.param.start=(val-1)*this.param.pageSize
+        this.queryMeetingList();
+      },
       queryMeetingList(){
         var self = this;
-        this.$axios.post("http://localhost:8111/meeting/queryMeetingList",this.$qs.stringify()).then(function(res){
+        if(this.param.data !=null && this.param.data !=""){
+          this.param.minDate = this.param.minDate[0]
+          this.param.maxDate = this.param.maxDate[1]
+        }
+        this.$axios.post("http://localhost:8111/meeting/queryMeetingList",this.$qs.stringify(this.param)).then(function(res){
           if(res.data.code==200){
-            console.log(res.data.data)
-            self.tableData = res.data.data;
+           // console.log(res.data.data)
+            self.tableData = res.data.data.meetingList;
+            self.totalCount=res.data.data.totalCount;
+           // alert(self.tableData)
           }
         })
       },
       queryRoomList(){
         var self = this;
-        this.$axios.post("http://localhost:8111/room/queryRoomList",this.$qs.stringify()).then(function(res){
+        this.$axios.post("http://localhost:8111/room/queryRoomList",this.$qs.stringify(this.param)).then(function(res){
           if(res.data.code==200){
-            console.log(res.data.data)
-            self.roomList = res.data.data;
+            //console.log(res.data.data)
+            self.roomList = res.data.data.roomList;
+           // alert(self.roomList)
           }
         })
       },
@@ -438,7 +502,6 @@
           if(res.data.code==200){
             self.dialogVisible = false;
             self.queryMeetingList();
-            self.meeting = {};
           }
         })
       },
@@ -475,8 +538,9 @@
         //this.product.status="1";
         this.dialogUpdateVisible= true;
         this.meeting = row;
+        this.queryRoomList();
+        this.queryMeetingList()
         this.photo=[{url:row.photo}]
-
       },
       cancelUpdate(){
         this.dialogUpdateVisible = false;
@@ -488,6 +552,7 @@
             self.dialogUpdateVisible = false;
             self.meeting = {};
             self.roomList = res.data.data;
+            alert(res.data.data)
           }
         })
       },
