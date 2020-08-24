@@ -273,7 +273,7 @@
         methods:{
             queryAttendanceList(){
                 var self = this;
-                this.$axios.post("http://localhost:8088/attendance/queryAttendanceList",this.$qs.stringify(this.sform)).then(function(res){
+                this.$axios.post("/zuulApi/attendance/attendance/queryAttendanceList",this.$qs.stringify(this.sform)).then(function(res){
                     if(res.data.code==200){
                         self.tableData = res.data.data;
                     } else{
@@ -284,7 +284,7 @@
             //查询类别
             queryCategoryList(){
                 var self = this;
-                this.$axios.post("http://localhost:8088/category/queryCategoryList").then(function(res){
+                this.$axios.post("/zuulApi/attendance/category/queryCategoryList").then(function(res){
                     if(res.data.code==200){
                         self.categoryList = res.data.data;
                     } else{
@@ -295,7 +295,7 @@
             //新增考勤
             addAttendance(){
                 var self = this
-                this.$axios.post("http://localhost:8088/attendance/addAttendance",this.$qs.stringify(this.form)).then(function (res) {
+                this.$axios.post("/zuulApi/attendance/attendance/addAttendance",this.$qs.stringify(this.form)).then(function (res) {
                     self.$message.success("新增成功")
                     self.clearAddForm()
                 }).catch(function (res) {
@@ -319,7 +319,7 @@
             //回显
             toUpdateAttendance(id){
                 var self = this
-                this.$axios.get("http://localhost:8088/attendance/queryAttendanceById?id="+id).then(function (res) {
+                this.$axios.get("/zuulApi/attendance/attendance/queryAttendanceById?id="+id).then(function (res) {
                     self.uform.id = res.data.data.id
                     self.uform.attWriteTime = res.data.data.attWriteTime
                     self.uform.roleName = res.data.data.roleName
@@ -336,7 +336,7 @@
             updateAttendance(){
                 var self = this
                 this.updateForm = false
-                this.$axios.post("http://localhost:8088/attendance/updateAttendance",this.$qs.stringify(this.uform)).then(function (res) {
+                this.$axios.post("/zuulApi/attendance/attendance/updateAttendance",this.$qs.stringify(this.uform)).then(function (res) {
                     self.$message.success("修改成功")
                     self.updateForm = false
                     self.queryAttendanceList()
@@ -354,7 +354,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.$axios.get("http://localhost:8088/attendance/deleteAttendance?id="+id).then(function (res) {
+                    this.$axios.get("/zuulApi/attendance/attendance/deleteAttendance?id="+id).then(function (res) {
                         self.$message.success("删除成功")
                         self.queryAttendanceList()
                     }).catch(function () {
@@ -383,7 +383,7 @@
                             //将遍历出来的值放到自定义的数组里面
                             ids.push(data.id)
                         })
-                        this.$axios.post("http://localhost:8088/attendance/deleteBatchAttendance",this.$qs.stringify({"ids":ids},{indices: false})).then(function (res) {
+                        this.$axios.post("/zuulApi/attendance/attendance/deleteBatchAttendance",this.$qs.stringify({"ids":ids},{indices: false})).then(function (res) {
                             self.$message.success("删除成功")
                             self.queryAttendanceList()
                         }).catch(function () {
