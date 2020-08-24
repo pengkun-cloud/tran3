@@ -8,6 +8,7 @@ import com.netflix.zuul.exception.ZuulException;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
@@ -73,6 +74,14 @@ public class LoginFilter extends ZuulFilter {
         RequestContext context = RequestContext.getCurrentContext();
         //获取request对象
         HttpServletRequest request = context.getRequest();
+        //获取response对象
+        HttpServletResponse response = context.getResponse();
+
+        //处理客户端传过来的自定义头信息
+        response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS,"x-auth,mtoken,content-type");
+        //处理客户端发过来的put，delete
+        response.addHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS,"PUT,POST,DELETE,GET");
+
 
         //【request请求】 获取请求头中的token
         String token = request.getHeader("x-auth");

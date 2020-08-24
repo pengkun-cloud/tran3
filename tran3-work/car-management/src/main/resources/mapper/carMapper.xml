@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.car.mapper.CarMapper">
+<sql id="sqlWhere">
+    <where>
+        <if test="carId !=null and carId !=''">
+            c.carId like concat("%",#{carId},"%")
+        </if>
+        <if test="carPlate !=null and carPlate !=''">
+            and c.carPlate =#{carPlate}
+        </if>
+        <if test="carType !=null ">
+            and c.carType =#{carType}
+        </if>
+        <if test="carStructure !=null and carStructure !=''">
+            c.carStructure like concat("%",#{carStructure},"%")
+        </if>
+    </where>
+
+</sql>
+
+    <!--分页查询-->
+    <select id="queryList" resultType="com.fh.car.model.Car" parameterType="com.fh.car.param.CarParam">
+        select * from t_car_message c left join t_type t on c.carType=t.id
+        <include refid="sqlWhere"></include>
+         order by cId
+         limit #{start},#{pageSize}
+    </select>
+    <!--分页查询-->
+    <select id="selectCountt" resultType="long" parameterType="com.fh.car.param.CarParam">
+         select count(*) from t_car_message
+    </select>
+    <!--添加-->
+    <insert id="addCar" parameterType="car">
+        insert into t_car_message(carId,carPlate,carType,carStructure,carCarry,carFuel,carEmissions,carColor,carRemark)
+        values(#{carId},#{carPlate},#{carType},#{carStructure},#{carCarry},#{carFuel},#{carEmissions},#{carColor},#{carRemark})
+    </insert>
+    <!--删除-->
+    <delete id="deleteCar">
+        delete from  t_car_message where cId =#{cId}
+    </delete>
+    <!--批量删除-->
+    <delete id="deleteBatch">
+        delete from  t_car_message where cId in
+        <foreach collection="list" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+
+    </delete>
+    <!--修改-->
+    <update id="updateCar" parameterType="car">
+    update t_car_message set carPlate=#{carPlate},carType=#{carType},carStructure=#{carStructure},carCarry =#{carCarry},carFuel =#{carFuel},carEmissions = #{carEmissions},carColor =#{carColor},carRemark=#{carRemark}
+        where cId=#{cId}
+    </update>
+
+
+
+
+
+
+
+
+
+    <!--<update id="updateStatus" >
+        update t_product set status=IF(status=1,0,1)   where id=#{id}
+    </update>-->
+    <!--<delete id="deleteBatch">
+        delete from  t_product where id in
+        <foreach collection="list" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+
+    </delete>-->
+
+    <!--<delete id="delete">
+        delete from  t_product where id =#{id}
+    </delete>-->
+
+    <!--<insert id="addProduct" parameterType="product">
+
+        insert into t_product(name,price,createDate,brandId,filePath,category1,category2,category3,status)
+        values(#{name},#{price},#{createDate},#{brandId},#{filePath},#{categoryId1},#{categoryId2},#{categoryId3},#{status})
+
+    </insert>-->
+    <!--<select id="queryListNoPage" resultType="com.fh.vo.ProductVo" parameterType="com.fh.param.ProductSearchParam">
+        SELECT
+        p.*, b.brandName,p.category1 as categoryId1,p.category2 as categoryId2,p.category3 as categoryId3,
+        CONCAT_WS('==>',c1.categoryName,c2.categoryName,c3.categoryName) categoryName
+        FROM
+        t_product p
+        LEFT JOIN t_brand b ON p.brandId = b.id
+        LEFT JOIN t_category c1 ON p.category1 = c1.id
+        LEFT JOIN t_category c2 ON p.category2 = c2.id
+        LEFT JOIN t_category c3 ON p.category3 = c3.id
+
+        ORDER BY
+        p.id DESC
+
+    </select>
+-->
+    <!--<insert id="addProductList" >
+
+        insert into t_product(name,price,createDate,brandId)
+        values
+        <foreach collection="list"  item="item" separator=",">
+        (#{item.name},#{item.price},#{item.createDate},#{item.brandId})
+        </foreach>
+    </insert>-->
+</mapper>

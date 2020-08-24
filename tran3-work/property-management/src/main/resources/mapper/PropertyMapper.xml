@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fh.mapper.PropertyMapper">
+    <sql id="whereSql">
+      <where>
+        <!--判断名字-->
+        <if test="name != null and name != ''">
+            and name like concat('%',#{name},'%')
+        </if>
+        <!-- 判断类别 -->
+        <if test="typeId != null and typeId!= -1">
+            and tt.typeId = #{typeId}
+        </if>
+      </where>
+    </sql>
+    <!--查询数据-->
+    <select id="queryProperty" resultType="com.fh.model.Property" parameterType="com.fh.model.PropertyQuery">
+        select ty.*,tt.typeName from t_property ty left join t_type tt on ty.typeId = tt.typeId
+        <include refid="whereSql"></include>
+        limit  #{start},#{pageSize}
+    </select>
+
+    <select id="selectCountt" resultType="long" parameterType="com.fh.model.PropertyQuery">
+        select count(*) from t_property
+    </select>
+    <!-- 查询小表数据 -->
+    <select id="queryType" resultType="com.fh.model.Types">
+        select * from t_type
+    </select>
+
+    <!-- 新增数据 -->
+    <insert id="addProperty" parameterType="com.fh.model.Property">
+        insert into t_property (name,count,conditions,site,price,buyTime,manner,remark,typeId)
+        values (#{name},#{count},#{conditions},#{site},#{price},#{buyTime},#{manner},#{remark},#{typeId})
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="deleteProperty" parameterType="com.fh.model.Property">
+        delete from t_property where id=#{id}
+    </delete>
+
+    <!-- 修改数据 -->
+    <update id="updateProperty" parameterType="com.fh.model.Property">
+        update t_property set name=#{name},count=#{count},conditions=#{conditions},site=#{site},price=#{price},buyTime=#{buyTime},manner=#{manner},remark=#{remark},typeId=#{typeId} where id=#{id}
+    </update>
+
+    <!-- 批量删除数据 -->
+    <delete id="deleteBathProperty" parameterType="String">
+        delete from t_property where id in
+        <foreach collection="array" item="aa" separator="," open="(" close=")" index="index">
+            #{aa}
+        </foreach>
+    </delete>
+
+</mapper>
