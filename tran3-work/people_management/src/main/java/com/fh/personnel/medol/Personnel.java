@@ -25,6 +25,40 @@ public class Personnel {
 
     private Integer roleid;//用户角色
 
+    private String password;//密码
+
+    private String salt;//盐
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Personnel(Integer id, String numbering, String name, Integer department, Integer security, Integer sex, Integer age, String professional, Integer roleid, String password, String salt) {
+        this.id = id;
+        this.numbering = numbering;
+        this.name = name;
+        this.department = department;
+        this.security = security;
+        this.sex = sex;
+        this.age = age;
+        this.professional = professional;
+        this.roleid = roleid;
+        this.password = password;
+        this.salt = salt;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Integer getRoleid() {
         return roleid;
     }
@@ -98,17 +132,6 @@ public class Personnel {
         this.professional = professional;
     }
 
-    public Personnel(Integer id, String numbering, String name, Integer department, Integer security, Integer sex, Integer age, String professional, Integer roleid) {
-        this.id = id;
-        this.numbering = numbering;
-        this.name = name;
-        this.department = department;
-        this.security = security;
-        this.sex = sex;
-        this.age = age;
-        this.professional = professional;
-        this.roleid = roleid;
-    }
 
     public Personnel() {
     }

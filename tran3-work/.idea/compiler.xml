@@ -6,21 +6,25 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="article_management" />
         <module name="attendance_management" />
         <module name="car-management" />
         <module name="meeting-management" />
         <module name="people_management" />
         <module name="personal_management" />
+        <module name="record" />
         <module name="springcloud-eureka" />
         <module name="springcloud-zuul" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="article_management" target="1.8" />
       <module name="attendance_management" target="1.8" />
       <module name="car-management" target="1.8" />
       <module name="meeting-management" target="1.8" />
       <module name="people_management" target="1.8" />
       <module name="personal_management" target="1.8" />
+      <module name="record" target="1.8" />
       <module name="springcloud-eureka" target="1.8" />
       <module name="springcloud-zuul" target="1.8" />
     </bytecodeTargetLevel>

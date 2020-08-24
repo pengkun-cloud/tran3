@@ -10,7 +10,7 @@ import Category from '@/components/category_management/CategoryVue'
 import Attendance from '@/components/category_management/AttendanceVue'
 import Meeting from '@/components/meeting-management/Meeting'
 import Room from '@/components/meeting-management/Room'
-
+import LoginVue from '@/components/login/LoginVue'
 
 
 Vue.use(Router)
@@ -69,6 +69,11 @@ export default new Router({
           path: '/Room',
           name: 'Room',
           component: Room,
+        },
+        {
+          path: '/LoginVue',
+          name: 'LoginVue',
+          component: LoginVue,
         }
       ]
     },

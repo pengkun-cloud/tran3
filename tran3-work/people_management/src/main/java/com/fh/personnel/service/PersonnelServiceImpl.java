@@ -39,4 +39,17 @@ public class PersonnelServiceImpl implements PersonnelService {
         personnelMapper.delPersonnel(id);
     }
 
+    @Override
+    public Personnel getPersonnelByName(String name) {
+        Personnel personnel = personnelMapper.getPersonnelByName(name);
+        return personnel;
+    }
+
+    @Override
+    public void updatePassword(Personnel personnel) {
+        personnelMapper.updatePassword(personnel);
+    }
+
+
+
 }
