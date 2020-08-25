@@ -219,7 +219,7 @@
       },
       queryRoomList(){
         var self = this;
-        this.$axios.post("http://localhost:8111/room/queryRoomList",this.$qs.stringify(this.param)).then(function(res){
+        this.$axios.post("/zuulApi/meeting_management/room/queryRoomList",this.$qs.stringify(this.param)).then(function(res){
           console.log(res.data.data)
           self.tableData = res.data.data.roomList;
           self.totalCount=res.data.data.totalCount;
@@ -236,7 +236,7 @@
       },
       addroom(){
         var self = this;
-        this.$axios.post("http://localhost:8111/room/addRoom",this.$qs.stringify(this.room)).then(function(res){
+        this.$axios.post("/zuulApi/meeting_management/room/addRoom",this.$qs.stringify(this.room)).then(function(res){
           if(res.data.code==200){
             self.dialogVisible = false;
             self.room = {};
@@ -246,7 +246,7 @@
       },
       handleDelete(index, row) {
         var self = this;
-        this.$axios.get("http://localhost:8111/room/deleteRoom/"+row.roomId,this.$qs.stringify(this.room)).then(function(res){
+        this.$axios.get("/zuulApi/meeting_management/room/deleteRoom/"+row.roomId,this.$qs.stringify(this.room)).then(function(res){
           if(res.data.code==200){
             self.queryRoomList();
           }
@@ -261,7 +261,7 @@
             delList.push(this.multipleSelection[i].roomId)
           }
 
-          this.$axios.post("http://localhost:8111/room/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
+          this.$axios.post("/zuulApi/meeting_management/room/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
             if(res.data.code==200){
               self.queryRoomList();
 
@@ -282,7 +282,7 @@
       },
       updateRoom(){
         var self = this;
-        this.$axios.post("http://localhost:8111/room/updateRoom",this.$qs.stringify(this.room)).then(function(res){
+        this.$axios.post("/zuulApi/meeting_management/room/updateRoom",this.$qs.stringify(this.room)).then(function(res){
           if(res.data.code==200){
             self.dialogUpdateVisible = false;
             self.room = {};

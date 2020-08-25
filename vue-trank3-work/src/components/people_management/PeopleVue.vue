@@ -202,7 +202,7 @@
       methods: {
         queryPersonneList(){
           var self = this;
-          this.$axios.post("http://localhost:8085/personnel/queryPersonnel").then(function (response) {
+          this.$axios.post("/zuulApi/people_management/personnel/queryPersonnel").then(function (response) {
             console.log(response.data.data);
             self.personnelList = response.data.data;
           })
@@ -210,7 +210,7 @@
 
         queryRoleList(){
           var self = this;
-          this.$axios.post("http://localhost:8085/role/queryRole").then(function (response) {
+          this.$axios.post("/zuulApi/people_management/role/queryRole").then(function (response) {
             console.log(response.data.data);
             self.roleList = response.data.data;
           })
@@ -218,7 +218,7 @@
 
         queryDepartmentList(){
           var self = this;
-          this.$axios.post("http://localhost:8085/department/queryDepartment").then(function (response) {
+          this.$axios.post("/zuulApi/people_management/department/queryDepartment").then(function (response) {
             if(response.code = 200){
               console.log(response.data.data);
               self.departmentList = response.data.data;
@@ -230,7 +230,7 @@
         updateoradd(){
           var self = this;
           console.log(this.personnel);
-          this.$axios.post("http://localhost:8085/personnel/addOrUpdate",this.$qs.stringify(this.personnel)).then(function (response) {
+          this.$axios.post("/zuulApi/people_management/personnel/addOrUpdate",this.$qs.stringify(this.personnel)).then(function (response) {
             //console.log(response);
             self.dialogFormVisible=false;
             self.queryPersonneList();
@@ -240,7 +240,7 @@
 
         deleteAnimal:function(index,row){
           var self = this;
-          this.$axios.get("http://localhost:8085/personnel/delPersonnel?id="+row.id).then(function (response) {
+          this.$axios.get("/zuulApi/people_management/personnel/delPersonnel?id="+row.id).then(function (response) {
             //console.log(response);
             self.queryPersonneList();
           })

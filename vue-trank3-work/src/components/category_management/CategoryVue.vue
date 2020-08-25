@@ -93,7 +93,7 @@
         methods:{
             queryCategoryList(){
                 var self = this;
-                this.$axios.post("http://localhost:8088/category/queryCategoryList").then(function(res){
+                this.$axios.post("/zuulApi/attendance_management/category/queryCategoryList").then(function(res){
                     if(res.data.code==200){
                         self.tableData = res.data.data;
                     } else{
@@ -104,7 +104,7 @@
             //新增衣服
             addCategory(){
                 var self = this
-                  this.$axios.post("http://localhost:8088/category/addCategory",this.$qs.stringify(this.form)).then(function (res) {
+                  this.$axios.post("/zuulApi/attendance_management/category/addCategory",this.$qs.stringify(this.form)).then(function (res) {
                       self.$message.success("新增成功")
                       self.clearAddForm()
                   }).catch(function (res) {
@@ -121,7 +121,7 @@
             //回显
             toUpdateCategory(id){
                 var self = this
-                this.$axios.get("http://localhost:8088/category/queryCategoryById?id="+id).then(function (res) {
+                this.$axios.get("/zuulApi/attendance_management/category/queryCategoryById?id="+id).then(function (res) {
                     self.uform.id = res.data.data.id
                     self.uform.categoryName = res.data.data.categoryName
                     self.updateForm = true
@@ -131,7 +131,7 @@
             updateCategory(){
                 var self = this
                 this.updateForm = false
-                  this.$axios.post("http://localhost:8088/category/updateCategory",this.$qs.stringify(this.uform)).then(function (res) {
+                  this.$axios.post("/zuulApi/attendance_management/category/updateCategory",this.$qs.stringify(this.uform)).then(function (res) {
                       self.$message.success("修改成功")
                       self.updateForm = false
                       self.queryCategoryList()
@@ -149,7 +149,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.$axios.get("http://localhost:8088/category/deleteCategory?id="+id).then(function (res) {
+                    this.$axios.get("/zuulApi/attendance_management/category/deleteCategory?id="+id).then(function (res) {
                         self.$message.success("删除成功")
                         self.queryCategoryList()
                     }).catch(function () {
@@ -178,7 +178,7 @@
                             //将遍历出来的值放到自定义的数组里面
                             ids.push(data.id)
                         })
-                        this.$axios.post("http://localhost:8088/category/deleteBatchCategory",this.$qs.stringify({"ids":ids},{indices: false})).then(function (res) {
+                        this.$axios.post("/zuulApi/attendance_management/category/deleteBatchCategory",this.$qs.stringify({"ids":ids},{indices: false})).then(function (res) {
                             self.$message.success("删除成功")
                             self.queryCategoryList()
                         }).catch(function () {

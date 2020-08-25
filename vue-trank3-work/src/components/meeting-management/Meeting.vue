@@ -466,7 +466,7 @@
           this.param.minDate = this.param.minDate[0]
           this.param.maxDate = this.param.maxDate[1]
         }
-        this.$axios.post("http://localhost:8111/meeting/queryMeetingList",this.$qs.stringify(this.param)).then(function(res){
+        this.$axios.post("/zuulApi/meeting_management/meeting/queryMeetingList",this.$qs.stringify(this.param)).then(function(res){
           if(res.data.code==200){
            // console.log(res.data.data)
             self.tableData = res.data.data.meetingList;
@@ -477,7 +477,7 @@
       },
       queryRoomList(){
         var self = this;
-        this.$axios.post("http://localhost:8111/room/queryRoomList",this.$qs.stringify(this.param)).then(function(res){
+        this.$axios.post("/zuulApi/meeting_management/room/queryRoomList",this.$qs.stringify(this.param)).then(function(res){
           if(res.data.code==200){
             //console.log(res.data.data)
             self.roomList = res.data.data.roomList;
@@ -498,7 +498,7 @@
       },
       addMeeting(){
         var self = this;
-        this.$axios.post("http://localhost:8111/meeting/addMeeting",this.$qs.stringify(this.meeting)).then(function(res){
+        this.$axios.post("/zuulApi/meeting_management/meeting/addMeeting",this.$qs.stringify(this.meeting)).then(function(res){
           if(res.data.code==200){
             self.dialogVisible = false;
             self.queryMeetingList();
@@ -508,7 +508,7 @@
       handleDelete(index, row) {
         //console.log(index, row);
         var self = this;
-        this.$axios.get("http://localhost:8111/meeting/deleteMeeting/"+row.meetingId,this.$qs.stringify(this.meeting)).then(function(res){
+        this.$axios.get("/zuulApi/meeting_management/meeting/deleteMeeting/"+row.meetingId,this.$qs.stringify(this.meeting)).then(function(res){
           if(res.data.code==200){
             self.queryMeetingList();
           }
@@ -523,7 +523,7 @@
             delList.push(this.multipleSelection[i].meetingId)
           }
 
-          this.$axios.post("http://localhost:8111/meeting/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
+          this.$axios.post("/zuulApi/meeting_management/meeting/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
             if(res.data.code==200){
               self.queryMeetingList();
             }
@@ -547,7 +547,7 @@
       },
       updateMeeting(){
         var self = this;
-        this.$axios.post("http://localhost:8111/meeting/updateMeeting",this.$qs.stringify(this.meeting)).then(function(res){
+        this.$axios.post("/zuulApi/meeting_management/meeting/updateMeeting",this.$qs.stringify(this.meeting)).then(function(res){
           if(res.data.code==200){
             self.dialogUpdateVisible = false;
             self.meeting = {};
