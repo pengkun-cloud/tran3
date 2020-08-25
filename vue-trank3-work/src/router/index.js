@@ -11,6 +11,9 @@ import Attendance from '@/components/category_management/AttendanceVue'
 import Meeting from '@/components/meeting-management/Meeting'
 import Room from '@/components/meeting-management/Room'
 import LoginVue from '@/components/login/LoginVue'
+import Carlist from '@/components/car-management/Carlist'
+import Sendlist from '@/components/car-management/Sendlist'
+import Garagelist from '@/components/car-management/Garagelist'
 
 
 Vue.use(Router)
@@ -74,7 +77,23 @@ export default new Router({
           path: '/LoginVue',
           name: 'LoginVue',
           component: LoginVue,
+        },
+        {
+          path: '/carlist',
+          name: 'Carlist',
+          component: Carlist,
+        },
+        {
+          path: '/garagelist',
+          name: 'Garagelist',
+          component: Garagelist,
+        },
+        {
+          path: '/sendlist',
+          name: 'Sendlist',
+          component: Sendlist,
         }
+
       ]
     },
 
