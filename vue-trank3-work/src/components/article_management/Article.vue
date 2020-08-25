@@ -214,7 +214,7 @@
         },
         addArticle(){
           var self = this;
-          this.$axios.post("http://localhost:8100/article/addArticle",this.$qs.stringify(this.article)).then(function(res){
+          this.$axios.post("/zuulApi/article_management/article/addArticle",this.$qs.stringify(this.article)).then(function(res){
             if(res.data.code==200){
               self.article = {};
               self.dialogAddVisible = false;
@@ -225,7 +225,7 @@
         //查询
         queryList(){
           var self = this;
-          this.$axios.post("http://localhost:8100/article/queryList",this.$qs.stringify(this.param)).then(function(res){
+          this.$axios.post("/zuulApi/article_management/article/queryList",this.$qs.stringify(this.param)).then(function(res){
             if(res.data.code==200){
               console.log(res.data.data.totalCount);
               self.tableData = res.data.data.list;
@@ -250,7 +250,7 @@
         //修改
         updateArticle(){
           var self = this;
-          this.$axios.post("http://localhost:8100/article/updateArticle",this.$qs.stringify(this.article)).then(function(res){
+          this.$axios.post("/zuulApi/article_management/article/updateArticle",this.$qs.stringify(this.article)).then(function(res){
             if(res.data.code==200){
               self.article = {};
               self.dialogUpdateVisible = false;
@@ -262,7 +262,7 @@
         handleDelete(index, row){
           //console.log(index, row);
           var self = this;
-          this.$axios.post("http://localhost:8100/article/deleteArticle/" + row.articleId,this.$qs.stringify()).then(function(res){
+          this.$axios.post("/zuulApi/article_management/article/deleteArticle/" + row.articleId,this.$qs.stringify()).then(function(res){
             if(res.data.code==200){
               self.queryList();
             }
