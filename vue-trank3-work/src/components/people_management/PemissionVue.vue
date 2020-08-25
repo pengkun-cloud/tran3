@@ -92,7 +92,7 @@
       methods: {
         queryPemissionList(){
           var self = this;
-          this.$axios.post("http://localhost:8085/pemission/queryPemission").then(function (response) {
+          this.$axios.post("/zuulApi/people_management/pemission/queryPemission").then(function (response) {
            if(response.code = 200){
              console.log(response.data.data);
              self.pemissionList = response.data.data;
@@ -104,7 +104,7 @@
         updateoradd(){
           var self = this;
           console.log(this.pemission);
-          this.$axios.post("http://localhost:8085/pemission/addOrUpdate",this.$qs.stringify(this.pemission)).then(function (response) {
+          this.$axios.post("/zuulApi/people_management/pemission/addOrUpdate",this.$qs.stringify(this.pemission)).then(function (response) {
             //console.log(response);
             self.dialogFormVisible=false;
             if(response.code = 200){
@@ -117,7 +117,7 @@
 
         deleteAnimal:function(index,row){
           var self = this;
-          this.$axios.get("http://localhost:8085/pemission/delPemission?id="+row.id).then(function (response) {
+          this.$axios.get("/zuulApi/people_management/pemission/delPemission?id="+row.id).then(function (response) {
             //console.log(response);
             if(response.code = 200){
               self.queryPemissionList();

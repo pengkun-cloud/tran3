@@ -17,7 +17,7 @@ public class RedisPool {
         jedisPoolConfig.setMaxTotal(1000);
         jedisPoolConfig.setMinIdle(500);
         jedisPoolConfig.setMaxIdle(500);
-        jedisPool = new JedisPool(jedisPoolConfig, "127.0.0.1", 6379);
+        jedisPool = new JedisPool(jedisPoolConfig, "192.168.205.128", 6379);
     }
 
     //只会在jvm虚拟机加载类，执行一次 【保证只能创建一个redis连接池】

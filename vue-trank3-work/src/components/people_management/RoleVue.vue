@@ -124,7 +124,7 @@
 
         queryRoleList(){
           var self = this;
-          this.$axios.post("http://localhost:8085/role/queryRole").then(function (response) {
+          this.$axios.post("/zuulApi/people_management/role/queryRole").then(function (response) {
             console.log(response.data.data);
             self.roleList = response.data.data;
           })
@@ -132,7 +132,7 @@
 
         queryPemissionList(){
           var self = this;
-          this.$axios.post("http://localhost:8085/pemission/queryPemission").then(function (response) {
+          this.$axios.post("/zuulApi/people_management/pemission/queryPemission").then(function (response) {
             if(response.code = 200){
               console.log(response.data.data);
               self.pemissionList = response.data.data;
@@ -144,7 +144,7 @@
         updateoradd(){
           var self = this;
           console.log(this.role);
-          this.$axios.post("http://localhost:8085/role/addOrUpdate",this.$qs.stringify(this.role)).then(function (response) {
+          this.$axios.post("/zuulApi/people_management/role/addOrUpdate",this.$qs.stringify(this.role)).then(function (response) {
             //console.log(response);
             self.dialogFormVisible=false;
             self.queryRoleList();
@@ -154,7 +154,7 @@
 
         deleteAnimal:function(index,row){
           var self = this;
-          this.$axios.get("http://localhost:8085/role/delRole?roleid="+row.roleid).then(function (response) {
+          this.$axios.get("/zuulApi/people_management/role/delRole?roleid="+row.roleid).then(function (response) {
             //console.log(response);
             self.queryRoleList();
           })
