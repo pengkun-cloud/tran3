@@ -241,7 +241,7 @@
       methods: {
         addcar(){
           var self = this;
-          this.$axios.post("http://localhost:1111/garages/addGarage",this.$qs.stringify(this.garage)).then(function(res){
+          this.$axios.post("/zuulApi/car_management/garages/addGarage",this.$qs.stringify(this.garage)).then(function(res){
             if(res.data.code==200){
               self.dialogFormVisible= false;
               self.queryList();
@@ -252,7 +252,7 @@
         queryList(){
           var self = this;
           console.log(this.param)
-          this.$axios.post("http://localhost:1111/garages/queryList",this.$qs.stringify(this.param)).then(function(res){
+          this.$axios.post("/zuulApi/car_management/garages/queryList",this.$qs.stringify(this.param)).then(function(res){
             if(res.data.code==200){
               self.tableData=res.data.data.list;
               self.totalCount=res.data.data.totalCount;
@@ -262,7 +262,7 @@
         carDelete(index, row) {
           console.log(index, row);
           var self = this;
-          this.$axios.post("http://localhost:1111/garages/del/"+row.xId,this.$qs.stringify(this.garage)).then(function(res){
+          this.$axios.post("/zuulApi/car_management/garages/del/"+row.xId,this.$qs.stringify(this.garage)).then(function(res){
             if(res.data.code==200){
               self.queryList();
             }
@@ -275,7 +275,7 @@
             for (let i = 0; i < this.multipleSelection.length; i++) {
               delList.push(this.multipleSelection[i].xId)
             }
-            this.$axios.post("http://localhost:1111/garages/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
+            this.$axios.post("/zuulApi/car_management/garages/deleteBatch",this.$qs.stringify({"idList":delList},{ indices: false })).then(function(res){
               if(res.data.code==200){
                 self.queryList();
                 self.isShow =false;
@@ -293,7 +293,7 @@
         updateCar(){
           console.log(this.garage);
           var self = this;
-          this.$axios.post("http://localhost:1111/garages/updateGarage",this.$qs.stringify(this.garage)).then(function(res){
+          this.$axios.post("/zuulApi/car_management/garages/updateGarage",this.$qs.stringify(this.garage)).then(function(res){
             if(res.data.code==200){
               self.dialogFormUpdate= false;
               self.queryList();
