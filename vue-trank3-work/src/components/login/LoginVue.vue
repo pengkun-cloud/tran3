@@ -38,7 +38,7 @@
         personnel: {
           remeber: false,
           name: '张三',
-         password:"123",
+         password:"1234",
          /* phone:"15137970287",
           code:"3479",*/
         }
@@ -54,11 +54,11 @@
       },*/
       onSubmit() {
         var self = this;
-        this.$axios.post("http://localhost:8085/login/login",this.$qs.stringify(this.personnel)).then(function (response) {
+        this.$axios.post("/zuulApi/people_management/login/login",this.$qs.stringify(this.personnel)).then(function (response) {
 
           if(response.data.code==200){
             Cookies.set("token",response.data.data)
-            self.$router.push("/PeopleVue");
+            self.$router.push("/admin");
             location.reload();
           }
         })

@@ -75,11 +75,6 @@ export default new Router({
           component: Room,
         },
         {
-          path: '/LoginVue',
-          name: 'LoginVue',
-          component: LoginVue,
-        },
-        {
           path: '/carlist',
           name: 'Carlist',
           component: Carlist,
@@ -101,6 +96,11 @@ export default new Router({
         }
 
       ]
+    },
+    {
+      path: '/',
+      name: 'LoginVue',
+      component: LoginVue,
     },
 
   ]
