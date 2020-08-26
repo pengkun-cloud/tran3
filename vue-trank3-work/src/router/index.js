@@ -14,6 +14,7 @@ import LoginVue from '@/components/login/LoginVue'
 import Carlist from '@/components/car-management/Carlist'
 import Sendlist from '@/components/car-management/Sendlist'
 import Garagelist from '@/components/car-management/Garagelist'
+import Propertys from '@/components/property_management/Propertys'
 
 
 Vue.use(Router)
@@ -92,6 +93,11 @@ export default new Router({
           path: '/sendlist',
           name: 'Sendlist',
           component: Sendlist,
+        },
+        {
+          path: '/Propertys',
+          name: 'Propertys',
+          component: Propertys,
         }
 
       ]
