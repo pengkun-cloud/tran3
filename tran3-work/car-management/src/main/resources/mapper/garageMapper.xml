@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fh.garage.mapper.GarageMapper">
+<sql id="sqlWhere">
+    <where>
+        <if test="xCarId !=null and xCarId !=''">
+            and c.xCarId =#{xCarId}
+        </if>
+        <if test="xPeo !=null and xPeo !=''">
+            and c.xPeo =#{xPeo}
+        </if>
+        <if test="jTime !=null">
+            and c.jTime =#{jTime}
+        </if>
+        <if test="xTime !=null">
+            and c.xTime =#{xTime}
+        </if>
+    </where>
+
+</sql>
+
+    <!--分页查询-->
+    <select id="queryList" resultType="com.fh.garage.model.Garage" parameterType="com.fh.garage.param.GarageParam">
+        select * from t_garage c
+        <include refid="sqlWhere"></include>
+         order by xId
+         limit #{start},#{pageSize}
+    </select>
+    <!--分页查询-->
+    <select id="selectCountt" resultType="long" parameterType="com.fh.garage.param.GarageParam">
+         select count(*) from t_garage
+    </select>
+
+    <!--添加-->
+    <insert id="addGarage" parameterType="com.fh.garage.model.Garage">
+        insert into t_garage(xCarId,xPeo,xTime,jTime)
+        values(#{xCarId},#{xPeo},#{xTime},#{jTime})
+    </insert>
+
+    <!--删除-->
+    <delete id="del">
+        delete from  t_garage where xId =#{xId}
+    </delete>
+    <!--批量删除-->
+    <delete id="deleteBatch">
+        delete from  t_garage where xId in
+        <foreach collection="list" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </delete>
+    <!--修改-->
+    <update id="updateGarage" parameterType="com.fh.garage.model.Garage">
+        update t_garage set xCarId=#{xCarId},xPeo=#{xPeo},xTime=#{xTime},jTime=#{jTime} where xId=#{xId}
+    </update>
+</mapper>
