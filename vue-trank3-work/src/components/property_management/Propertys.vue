@@ -331,7 +331,7 @@
        // p.pageSize = this.listQuery.limit
         this.$axios({
           method:"post",
-          url:"http://localhost:8018/property/queryProperty",
+          url:"/zuulApi/property_management/property/queryProperty",
           transformRequest:[function(data){
             return Qs.stringify(that.param)
           }],
@@ -350,7 +350,7 @@
         var self = this;
         this.$axios({
           method:'post',
-          url:'http://localhost:8018/property/queryType',
+          url:'/zuulApi/property_management/property/queryType',
         }).then(function (response) {
           //console.log(response.data.data);
           self.options=response.data.data
@@ -373,7 +373,7 @@
         this.dialogFormVisible = false;
         this.$axios({
           method:'post',
-          url:'http://localhost:8018/property/addProperty',
+          url:'/zuulApi/property_management/property/addProperty',
           data:this.ruleForm,
           transformRequest:[function (data) {
             return Qs.stringify(data);
@@ -396,7 +396,7 @@
         this.dialogFormVisible=false
         this.$axios({
           method:'post',
-          url:'http://localhost:8018/property/updateProperty',
+          url:'/zuulApi/property_management/property/updateProperty',
           transformRequest:[function (data) {
             return Qs.stringify(data);
           }],
@@ -410,7 +410,7 @@
       del(id){
         this.$axios({
           method:'post',
-          url:'http://localhost:8018/property/deleteProperty',
+          url:'/zuulApi/property_management/property/deleteProperty',
           transformRequest:[function (data) {
             return Qs.stringify(data)
           }],
@@ -430,7 +430,7 @@
         let id = this.multipleSelection.join(",");
         this.$axios({
           method:'post',
-          url:'http://localhost:8018/property/deleteBathProperty',
+          url:'/zuulApi/property_management/property/deleteBathProperty',
           transformRequest:[function (data) {
             return Qs.stringify(data)
           }],
